@@ -105,7 +105,7 @@ The processing pipeline that turned NASA's raw archives into `site/data/`, and t
 - **Natural Earth** land data (public domain), https://www.naturalearthdata.com/, via the world-atlas package.
 - **Software:** d3 and topojson-client (ISC licence); Archivo, IBM Plex Mono and Source Serif 4 fonts (SIL Open Font License). Licence texts are in `site/vendor/`.
 
-NASA data are not owned by this project. See `NOTICE` for what the licence does and does not cover.
+NASA data are not owned by this project.
 
 ## Limitations
 
