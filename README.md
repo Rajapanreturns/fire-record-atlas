@@ -116,30 +116,5 @@ NASA data are not owned by this project. See `NOTICE` for what the licence does 
 - **Missing is not zero.** Months without data are shown as missing, never as zero detections.
 - **Study boxes are approximate.** For example, the "Argentina Chaco / Parana" box lies mostly in Paraguay.
 
-## Development and AI assistance
-
-Atlas was built for the NASA Space Apps Challenge 2026 (November 14–15).
-
-**Work began before the event.**
-- Research notes date from 5–6 November 2026.
-- Implementation started on 9 November.
-- The first code commit is dated 10 November.
-
-We were told by someone involved with the event that starting early was allowed, but we do not have this in writing. It needs confirmation from the organizers. This public repository was created as a clean copy with a fresh first commit, so that internal research files are not published. The full development history, with dated commits, is kept in the private research repository and can be shared with the organizers.
-
-**AI assistance.** The project was built with extensive help from Anthropic's **Claude Code**.
-- **What the AI did:**
-  - wrote most of the code and tests;
-  - drafted the documentation, including this README;
-  - searched and summarized sources;
-  - acted as an independent reviewer of the science, the interface and the release.
-- **What the project lead did:**
-  - set the goals;
-  - wrote the requirements for each stage;
-  - made the scientific and design decisions, including approving each test plan before it ran;
-  - reviewed the results.
-- **What the AI did not do:** generate any data values. Every number comes from NASA FIRMS files processed by code, and the test results come from single, logged runs.
-
-## License
 
 The original code and documentation are under the Apache License 2.0 (`LICENSE`). Third-party data, software and fonts keep their own terms (`NOTICE`).
