@@ -1,0 +1,740 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "validation.schema.json",
+  "title": "site/data/validation.json",
+  "description": "Held-out Predict -> Reveal rows and summary metrics. status not_evaluated means rows and summary are empty and reason explains why. Never fill with placeholders in a real build.",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "file",
+    "kind",
+    "dataset_version",
+    "status",
+    "preregistration_ref",
+    "rows",
+    "summary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+    },
+    "file": {
+      "const": "validation"
+    },
+    "kind": {
+      "enum": [
+        "real",
+        "fixture"
+      ]
+    },
+    "watermark": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dataset_version": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "not_evaluated",
+        "evaluated"
+      ]
+    },
+    "reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "preregistration_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Path to the frozen pre-registration, e.g. docs/PREREGISTRATION.md."
+    },
+    "evaluated_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "interval_level": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "daynight": {
+      "enum": [
+        "D",
+        "N",
+        "DN"
+      ]
+    },
+    "target": {
+      "type": "string",
+      "description": "What 'actual' is, e.g. 'native Aqua MODIS detections per month, filter_id X'."
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "method_id",
+          "region_id",
+          "stratum",
+          "daynight",
+          "year",
+          "month",
+          "predicted",
+          "lo",
+          "hi",
+          "actual",
+          "actual_status"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "method_id": {
+            "type": "string"
+          },
+          "method_version": {
+            "type": "string"
+          },
+          "region_id": {
+            "type": "string"
+          },
+          "month": {
+            "type": "string",
+            "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"
+          },
+          "predicted": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "lo": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "hi": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "actual": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "actual_status": {
+            "enum": [
+              "observed",
+              "not_observed",
+              "excluded"
+            ]
+          },
+          "inside_interval": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "year": {
+            "type": "integer"
+          },
+          "stratum": {
+            "enum": [
+              "held_out",
+              "drift",
+              "loyo"
+            ],
+            "description": "held_out = primary held-out years; drift = 2022+ stratum (never trained on); loyo = secondary leave-one-year-out."
+          },
+          "daynight": {
+            "enum": [
+              "D",
+              "N"
+            ]
+          },
+          "input_platform": {
+            "enum": [
+              "snpp",
+              "noaa20",
+              "noaa21"
+            ]
+          },
+          "interval_level": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "quality": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9_]+$"
+            }
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "method_id",
+          "region_id",
+          "stratum",
+          "daynight",
+          "season",
+          "metric",
+          "scale",
+          "value",
+          "n",
+          "meets_minimum_n"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "method_id": {
+            "type": "string"
+          },
+          "region_id": {
+            "type": "string",
+            "description": "A region id or 'all'."
+          },
+          "metric": {
+            "enum": [
+              "mae_log1p",
+              "rmse_log1p",
+              "mean_signed_error_log1p",
+              "mae_count",
+              "annual_total_bias",
+              "interval_coverage",
+              "interval_coverage_block",
+              "interval_mean_width_log1p",
+              "skill_vs_ratio_log1p"
+            ],
+            "description": "Names carry their scale. Add new names (minor bump) rather than reusing one with a different scale."
+          },
+          "value": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "n": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Number of month rows contributing."
+          },
+          "n_years": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "ci_lo": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "ci_hi": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "preregistered": {
+            "type": "boolean"
+          },
+          "threshold": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Pre-registered pass threshold, if any."
+          },
+          "passed": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "note": {
+            "type": "string"
+          },
+          "scale": {
+            "enum": [
+              "log1p",
+              "count",
+              "ratio",
+              "fraction"
+            ]
+          },
+          "stratum": {
+            "enum": [
+              "held_out",
+              "drift",
+              "loyo"
+            ]
+          },
+          "daynight": {
+            "enum": [
+              "D",
+              "N"
+            ]
+          },
+          "input_platform": {
+            "enum": [
+              "snpp",
+              "noaa20",
+              "noaa21"
+            ]
+          },
+          "season": {
+            "enum": [
+              "all",
+              "active",
+              "off"
+            ]
+          },
+          "interval_level": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "n_regions": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "n_blocks": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "region x year blocks (for block coverage / cluster bootstrap)."
+          },
+          "meets_minimum_n": {
+            "type": "boolean",
+            "description": "Pre-registered minimum sample rules (PREREGISTRATION §5) met; if false the UI shows 'insufficient', not the value as evidence."
+          },
+          "ci_method": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "preregistration_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "sha256 of the frozen section, as in tests/science/preregistration.sha256."
+    },
+    "frozen_config_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Path to analysis/results/frozen_config.json (methods frozen before held-out scoring)."
+    },
+    "frozen_config_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "frozen_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}"
+    },
+    "region_selection_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Path to analysis/results/region_selection.json (pre-2012 Aqua-only selection)."
+    },
+    "run": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "primary",
+            "deviation_rerun"
+          ]
+        },
+        "deviation_ref": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Deviation-log entry required for a rerun."
+        },
+        "supersedes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "description": "Added 1.2.2; optional. Outcome of the pre-registered decision rule (PREREGISTRATION §6). Values are copied from the scored run, never recomputed.",
+      "required": [
+        "rule_ref",
+        "outcome",
+        "adopted_method",
+        "candidate_method",
+        "criteria",
+        "triggers"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "rule_ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "e.g. 'docs/PREREGISTRATION.md §6'"
+        },
+        "outcome": {
+          "enum": [
+            "adopt_candidate",
+            "fallback_to_baseline",
+            "inconclusive"
+          ]
+        },
+        "adopted_method": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "candidate_method": {
+          "type": "string"
+        },
+        "baseline_method": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "criteria": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "metric",
+              "value",
+              "ci_low",
+              "ci_high",
+              "threshold",
+              "met"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "metric": {
+                "type": "string"
+              },
+              "method_id": {
+                "type": "string",
+                "description": "default: candidate_method"
+              },
+              "region": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "null/absent = pooled ('all')"
+              },
+              "stratum": {
+                "enum": [
+                  "held_out",
+                  "drift",
+                  "loyo"
+                ]
+              },
+              "daynight": {
+                "enum": [
+                  "D",
+                  "N"
+                ]
+              },
+              "interval_level": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "value": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "ci_low": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "ci_high": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "threshold": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "comparison": {
+                "enum": [
+                  ">=",
+                  ">",
+                  "<=",
+                  "<"
+                ]
+              },
+              "met": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "triggers": {
+          "type": "array",
+          "description": "Per-region values the rule uses, INCLUDING those below the display minimum n.",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "region",
+              "metric",
+              "value",
+              "threshold"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "region": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "metric": {
+                "type": "string"
+              },
+              "method_id": {
+                "type": "string"
+              },
+              "stratum": {
+                "enum": [
+                  "held_out",
+                  "drift",
+                  "loyo"
+                ]
+              },
+              "daynight": {
+                "enum": [
+                  "D",
+                  "N"
+                ]
+              },
+              "interval_level": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "value": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "threshold": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "fired": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "n": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "below_display_minimum": {
+                "type": "boolean"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "blocks_won": {
+          "type": "object",
+          "required": [
+            "candidate",
+            "total",
+            "metric"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "candidate": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "total": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "metric": {
+              "type": "string"
+            },
+            "unit": {
+              "type": "string"
+            }
+          }
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "fixture"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "watermark"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "not_evaluated"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "reason"
+        ],
+        "properties": {
+          "rows": {
+            "maxItems": 0
+          },
+          "summary": {
+            "maxItems": 0
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "evaluated"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "preregistration_sha256",
+          "frozen_config_ref",
+          "frozen_at",
+          "region_selection_ref",
+          "run"
+        ],
+        "properties": {
+          "rows": {
+            "minItems": 1
+          },
+          "summary": {
+            "minItems": 1
+          },
+          "preregistration_ref": {
+            "type": "string"
+          },
+          "preregistration_sha256": {
+            "type": "string"
+          },
+          "frozen_config_ref": {
+            "type": "string"
+          },
+          "frozen_at": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ]
+}

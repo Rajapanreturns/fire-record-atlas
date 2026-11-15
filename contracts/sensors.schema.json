@@ -1,0 +1,271 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sensors.schema.json",
+  "title": "site/data/sensors.json",
+  "description": "Mission timeline. Every date carries status actual|projected|unknown and a source; projected dates must never be drawn like actual ones.",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "file",
+    "kind",
+    "as_of",
+    "missions"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+    },
+    "file": {
+      "const": "sensors"
+    },
+    "kind": {
+      "enum": [
+        "real",
+        "fixture"
+      ]
+    },
+    "watermark": {
+      "type": "string",
+      "minLength": 1
+    },
+    "as_of": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "missions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "platform",
+          "instrument",
+          "label",
+          "events"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "platform": {
+            "enum": [
+              "terra",
+              "aqua",
+              "snpp",
+              "noaa20",
+              "noaa21"
+            ]
+          },
+          "instrument": {
+            "enum": [
+              "MODIS",
+              "VIIRS"
+            ]
+          },
+          "label": {
+            "type": "string"
+          },
+          "nominal_overpass_local": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "e.g. '13:30 ascending'"
+          },
+          "native_pixel_m_nadir": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "firms_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Exact FIRMS 'satellite' column values, e.g. 'Aqua', 'N', 'N20'."
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "kind",
+                "date",
+                "status",
+                "source"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "launch",
+                    "archive_start",
+                    "archive_end",
+                    "drift_start",
+                    "constellation_exit",
+                    "projected_end_of_science",
+                    "ended",
+                    "other",
+                    "firms_data_start",
+                    "firms_data_end",
+                    "orbit_lowering",
+                    "end_of_science",
+                    "end_of_operations",
+                    "decommission"
+                  ],
+                  "description": "1.2.0 vocabulary: launch, archive_start, archive_end, drift_start, constellation_exit, projected_end_of_science, ended, other. archive_* = FIRMS data availability, NOT satellite life. ended = the satellite/instrument actually stopped (retirement). Legacy kinds (firms_data_start, firms_data_end, orbit_lowering, end_of_science, end_of_operations, decommission) are accepted only in files with contract_version < 1.2."
+                },
+                "date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$",
+                  "description": "ISO date at the precision known (YYYY, YYYY-MM or YYYY-MM-DD)."
+                },
+                "status": {
+                  "enum": [
+                    "actual",
+                    "projected",
+                    "unknown"
+                  ]
+                },
+                "source": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Citation or URL. 'fixture' only in fixtures."
+                },
+                "note": {
+                  "type": "string"
+                },
+                "date_precision": {
+                  "enum": [
+                    "year",
+                    "month",
+                    "day"
+                  ],
+                  "description": "Added 1.2.0; required for contract >= 1.2. Must match the date string length."
+                },
+                "projected": {
+                  "type": "boolean",
+                  "description": "Added 1.2.0; required for contract >= 1.2. Must equal (status == 'projected')."
+                },
+                "source_ref": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Optional pointer to docs/research/CONTEXT-SOURCES.md entry."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "overpass_lst": {
+      "type": "array",
+      "description": "Added in 1.2.0; optional. Per-platform yearly median local solar time (h) of detections, measured from FIRMS acq_time + longitude/15 (mean solar time).",
+      "items": {
+        "type": "object",
+        "required": [
+          "platform",
+          "year",
+          "median_local_solar_time_h",
+          "n",
+          "region_scope",
+          "source_ref"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "platform": {
+            "enum": [
+              "terra",
+              "aqua",
+              "snpp",
+              "noaa20",
+              "noaa21"
+            ]
+          },
+          "year": {
+            "type": "integer",
+            "minimum": 2000
+          },
+          "daynight": {
+            "enum": [
+              "D",
+              "N"
+            ]
+          },
+          "median_local_solar_time_h": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "exclusiveMaximum": 24
+          },
+          "iqr_h": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number"
+            }
+          },
+          "n": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "region_scope": {
+            "type": "string",
+            "description": "'all_pilot_regions', a region id, or 'global'."
+          },
+          "source_ref": {
+            "type": "object",
+            "required": [
+              "path",
+              "key"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "type": "string",
+                "pattern": "^analysis/results/"
+              },
+              "key": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "description": "Where the number comes from: a file under analysis/results/ and a key/JSON-pointer inside it."
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "if": {
+    "properties": {
+      "kind": {
+        "const": "fixture"
+      }
+    }
+  },
+  "then": {
+    "required": [
+      "watermark"
+    ]
+  }
+}

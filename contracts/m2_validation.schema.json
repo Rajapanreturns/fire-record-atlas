@@ -1,0 +1,663 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "m2_validation.schema.json",
+ "title": "site/data/m2_validation.json (contract 1.4.0)",
+ "description": "M2 confirmatory held-out evidence (NOAA-20 -> Aqua scale), copied read-only from analysis/results_m2/confirm. One row per held-out month, misses included.",
+ "type": "object",
+ "required": [
+  "contract_version",
+  "file",
+  "kind",
+  "dataset_version",
+  "status",
+  "outcome",
+  "daynight",
+  "filter_id",
+  "window",
+  "method",
+  "envelope",
+  "regions",
+  "month_rows",
+  "pooled",
+  "controls",
+  "provenance"
+ ],
+ "properties": {
+  "contract_version": {
+   "type": "string",
+   "pattern": "^1\\.([4-9]|[1-9][0-9])\\.[0-9]+$"
+  },
+  "file": {
+   "const": "m2_validation"
+  },
+  "kind": {
+   "enum": [
+    "real",
+    "fixture"
+   ]
+  },
+  "watermark": {
+   "type": "string",
+   "minLength": 1
+  },
+  "dataset_version": {
+   "type": "string"
+  },
+  "status": {
+   "const": "evaluated"
+  },
+  "question": {
+   "type": "string"
+  },
+  "outcome": {
+   "enum": [
+    "SUCCESS",
+    "FAILURE",
+    "INCONCLUSIVE"
+   ]
+  },
+  "daynight": {
+   "enum": [
+    "D",
+    "N"
+   ]
+  },
+  "filter_id": {
+   "type": "string"
+  },
+  "window": {
+   "type": "object",
+   "required": [
+    "start",
+    "end",
+    "folds"
+   ],
+   "properties": {
+    "start": {
+     "type": "string"
+    },
+    "end": {
+     "type": "string"
+    },
+    "folds": {
+     "type": "array",
+     "items": {
+      "type": "integer"
+     }
+    }
+   }
+  },
+  "method": {
+   "type": "object",
+   "required": [
+    "id",
+    "lane",
+    "version",
+    "kappa",
+    "predictor_platform"
+   ]
+  },
+  "envelope": {
+   "type": "object",
+   "required": [
+    "platform",
+    "period",
+    "quantile_method"
+   ]
+  },
+  "regions": {
+   "type": "array",
+   "minItems": 1,
+   "items": {
+    "type": "object",
+    "required": [
+     "region_id",
+     "status",
+     "status_label",
+     "n",
+     "cov90",
+     "cov80",
+     "cov90_covered",
+     "cov80_covered",
+     "mean_width90_log1p",
+     "mean_width80_log1p",
+     "mae_log1p",
+     "median_abs_annual_total_bias",
+     "by_season",
+     "q3_status",
+     "featured_month",
+     "featured_index",
+     "source_ref"
+    ],
+    "properties": {
+     "region_id": {
+      "type": "string"
+     },
+     "status": {
+      "enum": [
+       "validated",
+       "provisional",
+       "explore_only",
+       "fixture"
+      ]
+     },
+     "status_label": {
+      "type": "string"
+     },
+     "n": {
+      "type": "integer",
+      "minimum": 0
+     },
+     "cov90": {
+      "type": "number"
+     },
+     "cov80": {
+      "type": "number"
+     },
+     "cov90_covered": {
+      "type": "integer",
+      "minimum": 0
+     },
+     "cov80_covered": {
+      "type": "integer",
+      "minimum": 0
+     },
+     "cp90_upper": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "mean_width90_log1p": {
+      "type": "number"
+     },
+     "mean_width80_log1p": {
+      "type": "number"
+     },
+     "mae_log1p": {
+      "type": "number"
+     },
+     "median_abs_annual_total_bias": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "by_season": {
+      "type": "object",
+      "additionalProperties": {
+       "$ref": "#/$defs/season"
+      }
+     },
+     "q3_status": {
+      "type": "object",
+      "required": [
+       "status"
+      ]
+     },
+     "featured_month": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"
+     },
+     "featured_index": {
+      "type": "integer",
+      "minimum": 0
+     },
+     "source_ref": {
+      "$ref": "#/$defs/source_ref"
+     }
+    }
+   }
+  },
+  "month_rows": {
+   "type": "array",
+   "minItems": 1,
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "region_id",
+     "month",
+     "cal_month",
+     "fold",
+     "season",
+     "noaa20_raw",
+     "pred",
+     "lo80",
+     "hi80",
+     "lo90",
+     "hi90",
+     "tier90",
+     "actual",
+     "inside80",
+     "inside90",
+     "log1p_error",
+     "ratio_pred_to_actual",
+     "clim_pred",
+     "env_p10",
+     "env_p90",
+     "env_n_years",
+     "low_count",
+     "q4_truth",
+     "q4_n20",
+     "q4_clim",
+     "q4_naive",
+     "range_crosses_edge"
+    ],
+    "properties": {
+     "region_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_-]*$"
+     },
+     "month": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"
+     },
+     "cal_month": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 12
+     },
+     "fold": {
+      "type": "integer"
+     },
+     "season": {
+      "enum": [
+       "active",
+       "off"
+      ]
+     },
+     "noaa20_raw": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "native NOAA-20 count, own scale (value_kind raw_viirs)"
+     },
+     "pred": {
+      "type": "number",
+      "minimum": 0,
+      "description": "converted_validated point value (Aqua scale)"
+     },
+     "lo80": {
+      "type": "number"
+     },
+     "hi80": {
+      "type": "number"
+     },
+     "lo90": {
+      "type": "number"
+     },
+     "hi90": {
+      "type": "number"
+     },
+     "tier90": {
+      "type": "string"
+     },
+     "actual": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "native Aqua (observed); the site hides it until Reveal"
+     },
+     "inside80": {
+      "type": "boolean"
+     },
+     "inside90": {
+      "type": "boolean"
+     },
+     "log1p_error": {
+      "type": "number"
+     },
+     "ratio_pred_to_actual": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "clim_pred": {
+      "type": "number"
+     },
+     "env_p10": {
+      "type": "number"
+     },
+     "env_p90": {
+      "type": "number"
+     },
+     "env_n_years": {
+      "type": "integer",
+      "minimum": 0
+     },
+     "low_count": {
+      "type": "boolean"
+     },
+     "q4_truth": {
+      "enum": [
+       "below",
+       "within",
+       "above",
+       "cant_tell"
+      ]
+     },
+     "q4_n20": {
+      "enum": [
+       "below",
+       "within",
+       "above",
+       "cant_tell"
+      ]
+     },
+     "q4_clim": {
+      "enum": [
+       "below",
+       "within",
+       "above",
+       "cant_tell"
+      ]
+     },
+     "q4_naive": {
+      "enum": [
+       "below",
+       "within",
+       "above",
+       "cant_tell"
+      ]
+     },
+     "range_crosses_edge": {
+      "type": "boolean",
+      "description": "tag only: the 90% range straddles p10 or p90"
+     }
+    }
+   }
+  },
+  "pooled": {
+   "type": "object",
+   "required": [
+    "q1",
+    "q2",
+    "q3",
+    "q4"
+   ],
+   "properties": {
+    "q1": {
+     "type": "object",
+     "required": [
+      "outcome",
+      "n",
+      "cov90",
+      "cov90_covered",
+      "cov80",
+      "cov80_covered",
+      "mae_log1p",
+      "skill_vs_aqua_clim",
+      "skill_ci95_block",
+      "by_season"
+     ],
+     "properties": {
+      "by_season": {
+       "type": "object",
+       "additionalProperties": {
+        "$ref": "#/$defs/season"
+       }
+      }
+     }
+    },
+    "q2": {
+     "type": "object",
+     "required": [
+      "n",
+      "delta_mae",
+      "delta_mae_ci95_block"
+     ]
+    },
+    "q3": {
+     "type": "object",
+     "required": [
+      "outcome",
+      "n",
+      "cov90",
+      "cp90_upper_naive"
+     ]
+    },
+    "q4": {
+     "type": "object",
+     "required": [
+      "rule",
+      "n_rows",
+      "n_low_count",
+      "arms",
+      "viirs_era_arm"
+     ],
+     "properties": {
+      "arms": {
+       "type": "object",
+       "required": [
+        "n20_direct",
+        "aqua_clim",
+        "naive"
+       ],
+       "additionalProperties": {
+        "$ref": "#/$defs/arm"
+       }
+      },
+      "viirs_era_arm": {
+       "type": "object",
+       "required": [
+        "site_label",
+        "crosstab_label",
+        "agreement_among_decided",
+        "cohen_kappa",
+        "confusion"
+       ],
+       "properties": {
+        "confusion": {
+         "$ref": "#/$defs/confusion"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "controls": {
+   "type": "object"
+  },
+  "provenance": {
+   "type": "object",
+   "required": [
+    "lock_id",
+    "freeze_tag",
+    "results_tag",
+    "files",
+    "q4_confusion_orientation",
+    "featured_month_rule"
+   ],
+   "properties": {
+    "lock_id": {
+     "type": "string",
+     "minLength": 1
+    },
+    "files": {
+     "type": "array",
+     "minItems": 1,
+     "items": {
+      "type": "object",
+      "required": [
+       "path",
+       "sha256"
+      ],
+      "properties": {
+       "path": {
+        "type": "string"
+       },
+       "sha256": {
+        "type": [
+         "string",
+         "null"
+        ],
+        "pattern": "^[0-9a-f]{64}$"
+       }
+      }
+     }
+    }
+   }
+  },
+  "notes": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  }
+ },
+ "$defs": {
+  "confusion": {
+   "type": "object",
+   "required": [
+    "rows",
+    "cols",
+    "classes",
+    "counts"
+   ],
+   "properties": {
+    "rows": {
+     "type": "string"
+    },
+    "cols": {
+     "type": "string"
+    },
+    "classes": {
+     "const": [
+      "below",
+      "within",
+      "above",
+      "cant_tell"
+     ]
+    },
+    "counts": {
+     "type": "array",
+     "minItems": 4,
+     "maxItems": 4,
+     "items": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+       "type": "integer",
+       "minimum": 0
+      }
+     }
+    }
+   }
+  },
+  "arm": {
+   "type": "object",
+   "required": [
+    "method",
+    "decided_fraction",
+    "agreement_among_decided",
+    "wrong_decisive_rate",
+    "cohen_kappa",
+    "confusion",
+    "source_ref"
+   ],
+   "properties": {
+    "row_field": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "method": {
+     "type": "string"
+    },
+    "n_decided": {
+     "type": "integer",
+     "minimum": 0
+    },
+    "decided_fraction": {
+     "type": "number"
+    },
+    "agreement_among_decided": {
+     "type": [
+      "number",
+      "null"
+     ]
+    },
+    "wrong_decisive_rate": {
+     "type": [
+      "number",
+      "null"
+     ]
+    },
+    "cohen_kappa": {
+     "type": [
+      "number",
+      "null"
+     ]
+    },
+    "confusion": {
+     "$ref": "#/$defs/confusion"
+    },
+    "source_ref": {
+     "$ref": "#/$defs/source_ref"
+    }
+   }
+  },
+  "season": {
+   "type": "object",
+   "required": [
+    "n",
+    "cov90",
+    "cov90_covered",
+    "cov80",
+    "cov80_covered",
+    "mean_width90_log1p"
+   ],
+   "properties": {
+    "n": {
+     "type": "integer",
+     "minimum": 0
+    },
+    "cov90": {
+     "type": "number"
+    },
+    "cov90_covered": {
+     "type": "integer",
+     "minimum": 0
+    },
+    "cov80": {
+     "type": "number"
+    },
+    "cov80_covered": {
+     "type": "integer",
+     "minimum": 0
+    },
+    "mean_width90_log1p": {
+     "type": [
+      "number",
+      "null"
+     ]
+    },
+    "mean_width80_log1p": {
+     "type": [
+      "number",
+      "null"
+     ]
+    }
+   }
+  },
+  "source_ref": {
+   "type": "object",
+   "required": [
+    "path",
+    "key"
+   ],
+   "properties": {
+    "path": {
+     "type": "string",
+     "pattern": "^analysis/results_m2/"
+    },
+    "key": {
+     "type": "string"
+    }
+   }
+  }
+ }
+}

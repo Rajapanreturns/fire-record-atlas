@@ -1,0 +1,757 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "series.schema.json",
+ "title": "site/data/region/<id>/series.json",
+ "description": "Monthly series for one region. Native lanes (per platform, observed) are kept separate from modelled lanes (derived from VIIRS) and from the assembled record. record.source is authoritative per month; there is no hard-coded splice year.",
+ "type": "object",
+ "required": [
+  "contract_version",
+  "file",
+  "kind",
+  "region_id",
+  "dataset_version",
+  "daynight",
+  "filter_id",
+  "unit",
+  "interval_level",
+  "strategy_id",
+  "months"
+ ],
+ "additionalProperties": false,
+ "properties": {
+  "contract_version": {
+   "type": "string",
+   "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+  },
+  "file": {
+   "const": "series"
+  },
+  "kind": {
+   "enum": [
+    "real",
+    "fixture"
+   ]
+  },
+  "watermark": {
+   "type": "string",
+   "minLength": 1
+  },
+  "region_id": {
+   "type": "string",
+   "pattern": "^[a-z0-9][a-z0-9_-]*$"
+  },
+  "dataset_version": {
+   "type": "string"
+  },
+  "daynight": {
+   "enum": [
+    "D",
+    "N",
+    "DN"
+   ],
+   "description": "Which overpasses are counted. DN = day and night summed (each still per-sensor native)."
+  },
+  "filter_id": {
+   "type": "string",
+   "description": "Detection filter applied to native counts, e.g. 'type0_conf_all'. Defined in docs/CONTRACT.md / pipeline."
+  },
+  "unit": {
+   "type": "object",
+   "required": [
+    "id",
+    "label"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "id": {
+     "enum": [
+      "detections_per_month"
+     ]
+    },
+    "label": {
+     "type": "string"
+    },
+    "definition": {
+     "type": "string"
+    }
+   }
+  },
+  "interval_level": {
+   "type": [
+    "number",
+    "null"
+   ],
+   "exclusiveMinimum": 0,
+   "exclusiveMaximum": 1
+  },
+  "strategy_id": {
+   "enum": [
+    "A",
+    "B",
+    "C",
+    "undecided"
+   ]
+  },
+  "months": {
+   "type": "array",
+   "items": {
+    "$ref": "#/$defs/month_row"
+   }
+  },
+  "notes": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "baseline": {
+   "type": "object",
+   "description": "Usual-month envelope per calendar month from OBSERVED native Aqua in the baseline era (one instrument, no conversion). Added in 1.1.0; optional.",
+   "required": [
+    "platform",
+    "era",
+    "daynight",
+    "filter_id",
+    "quantile_method",
+    "min_years",
+    "entries"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "platform": {
+     "const": "aqua"
+    },
+    "era": {
+     "enum": [
+      "modis_only",
+      "overlap"
+     ],
+     "description": "Manifest era id the baseline years are drawn from (default modis_only)."
+    },
+    "daynight": {
+     "enum": [
+      "D",
+      "N",
+      "DN"
+     ]
+    },
+    "filter_id": {
+     "type": "string"
+    },
+    "quantile_method": {
+     "const": "linear",
+     "description": "Linear interpolation between order statistics (numpy default / Hyndman-Fan type 7)."
+    },
+    "min_years": {
+     "type": "integer",
+     "minimum": 1,
+     "description": "Entries with n_years < min_years must not support a verdict."
+    },
+    "excluded_quality": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+     },
+     "description": "Quality flags whose months were left out, e.g. partial_month."
+    },
+    "entries": {
+     "type": "array",
+     "minItems": 12,
+     "maxItems": 12,
+     "items": {
+      "type": "object",
+      "required": [
+       "month",
+       "p10",
+       "p50",
+       "p90",
+       "n_years",
+       "years"
+      ],
+      "additionalProperties": false,
+      "properties": {
+       "month": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 12
+       },
+       "p10": {
+        "type": [
+         "number",
+         "null"
+        ],
+        "minimum": 0
+       },
+       "p50": {
+        "type": [
+         "number",
+         "null"
+        ],
+        "minimum": 0
+       },
+       "p90": {
+        "type": [
+         "number",
+         "null"
+        ],
+        "minimum": 0
+       },
+       "n_years": {
+        "type": "integer",
+        "minimum": 0
+       },
+       "years": {
+        "type": "array",
+        "items": {
+         "type": "integer"
+        }
+       }
+      },
+      "if": {
+       "properties": {
+        "n_years": {
+         "const": 0
+        }
+       }
+      },
+      "then": {
+       "properties": {
+        "p10": {
+         "type": "null"
+        },
+        "p50": {
+         "type": "null"
+        },
+        "p90": {
+         "type": "null"
+        }
+       }
+      },
+      "else": {
+       "properties": {
+        "p10": {
+         "type": "number"
+        },
+        "p50": {
+         "type": "number"
+        },
+        "p90": {
+         "type": "number"
+        }
+       }
+      }
+     }
+    },
+    "period": {
+     "type": "object",
+     "required": [
+      "start_year",
+      "end_year",
+      "complete_years_only"
+     ],
+     "additionalProperties": false,
+     "description": "Added in 1.2.0; optional (required by the validator for contract >= 1.2). Inclusive year range of baseline years.",
+     "properties": {
+      "start_year": {
+       "type": "integer",
+       "minimum": 2000
+      },
+      "end_year": {
+       "type": "integer",
+       "minimum": 2000
+      },
+      "complete_years_only": {
+       "type": "boolean",
+       "description": "true = only calendar years in which Aqua is in the archive for all 12 months (2002 excluded: Aqua starts July)."
+      }
+     }
+    }
+   }
+  },
+  "verdict_rule": {
+   "type": "object",
+   "required": [
+    "id",
+    "description"
+   ],
+   "additionalProperties": false,
+   "description": "How month.verdict was computed. Added in 1.1.0; optional (required if any month has a verdict).",
+   "properties": {
+    "id": {
+     "type": "string",
+     "pattern": "^[a-z0-9_]+$"
+    },
+    "description": {
+     "type": "string",
+     "minLength": 1
+    },
+    "ruler": {
+     "enum": [
+      "record"
+     ],
+     "description": "Which value is judged: record.value with record.lo/hi."
+    },
+    "uses_interval": {
+     "type": "boolean"
+    },
+    "min_years": {
+     "type": "integer",
+     "minimum": 1
+    }
+   }
+  },
+  "provenance": {
+   "type": "object",
+   "description": "Added 1.4.0, optional: where converted values come from (m2_primary series)."
+  }
+ },
+ "if": {
+  "properties": {
+   "kind": {
+    "const": "fixture"
+   }
+  }
+ },
+ "then": {
+  "required": [
+   "watermark"
+  ]
+ },
+ "$defs": {
+  "month": {
+   "type": "string",
+   "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"
+  },
+  "num_or_null": {
+   "type": [
+    "number",
+    "null"
+   ]
+  },
+  "native_cell": {
+   "type": "object",
+   "required": [
+    "status",
+    "n"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "status": {
+     "enum": [
+      "observed",
+      "not_observed",
+      "not_in_archive",
+      "excluded"
+     ],
+     "description": "observed: archive covers this platform-month and n detections were reported (0 is allowed and means 'none reported', not 'certified fire-free'). not_observed: platform operating but month known missing/outage. not_in_archive: platform not operating or not ingested. excluded: dropped by a quality rule (see quality flags)."
+    },
+    "n": {
+     "type": [
+      "integer",
+      "null"
+     ],
+     "minimum": 0
+    },
+    "n_all_types": {
+     "type": [
+      "integer",
+      "null"
+     ],
+     "minimum": 0
+    },
+    "sum_frp": {
+     "type": [
+      "number",
+      "null"
+     ],
+     "minimum": 0
+    },
+    "n_days_with_detection": {
+     "type": [
+      "integer",
+      "null"
+     ],
+     "minimum": 0,
+     "maximum": 31
+    },
+    "archive": {
+     "enum": [
+      "standard",
+      "nrt",
+      "mixed",
+      "unknown"
+     ]
+    },
+    "value_kind": {
+     "$ref": "#/$defs/value_kind"
+    }
+   },
+   "if": {
+    "properties": {
+     "status": {
+      "const": "observed"
+     }
+    }
+   },
+   "then": {
+    "properties": {
+     "n": {
+      "type": "integer"
+     }
+    }
+   },
+   "else": {
+    "properties": {
+     "n": {
+      "type": "null"
+     }
+    }
+   }
+  },
+  "modelled_cell": {
+   "type": "object",
+   "required": [
+    "status",
+    "value",
+    "lo",
+    "hi",
+    "method_id",
+    "method_version"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "status": {
+     "enum": [
+      "estimated",
+      "not_computed",
+      "not_applicable",
+      "insufficient_input"
+     ]
+    },
+    "value": {
+     "$ref": "#/$defs/num_or_null"
+    },
+    "lo": {
+     "$ref": "#/$defs/num_or_null"
+    },
+    "hi": {
+     "$ref": "#/$defs/num_or_null"
+    },
+    "method_id": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "method_version": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "inputs": {
+     "type": "array",
+     "items": {
+      "enum": [
+       "snpp",
+       "noaa20",
+       "noaa21",
+       "terra",
+       "aqua"
+      ]
+     },
+     "description": "Platforms the estimate was derived from."
+    },
+    "value_kind": {
+     "$ref": "#/$defs/value_kind"
+    }
+   },
+   "if": {
+    "properties": {
+     "status": {
+      "const": "estimated"
+     }
+    }
+   },
+   "then": {
+    "properties": {
+     "value": {
+      "type": "number"
+     }
+    }
+   },
+   "else": {
+    "properties": {
+     "value": {
+      "type": "null"
+     },
+     "lo": {
+      "type": "null"
+     },
+     "hi": {
+      "type": "null"
+     }
+    }
+   }
+  },
+  "record_cell": {
+   "type": "object",
+   "required": [
+    "source",
+    "value",
+    "lo",
+    "hi",
+    "method_id"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "source": {
+     "enum": [
+      "observed_aqua",
+      "modelled_from_viirs",
+      "blended",
+      "terra_only",
+      "not_observed"
+     ],
+     "description": "observed_aqua: value = native Aqua n, no interval. modelled_from_viirs: value = a modelled lane. blended: strategy C combination. terra_only: only Terra exists (pre-Aqua); value MUST be null (Terra is not on the Aqua scale). not_observed: value null."
+    },
+    "value": {
+     "$ref": "#/$defs/num_or_null"
+    },
+    "lo": {
+     "$ref": "#/$defs/num_or_null"
+    },
+    "hi": {
+     "$ref": "#/$defs/num_or_null"
+    },
+    "method_id": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "lane": {
+     "enum": [
+      "aqua",
+      "aqua_equiv_operator",
+      "aqua_equiv_ratio",
+      "aqua_equiv_n20_ratio",
+      "blend",
+      null
+     ]
+    },
+    "value_kind": {
+     "$ref": "#/$defs/value_kind"
+    }
+   },
+   "allOf": [
+    {
+     "if": {
+      "properties": {
+       "source": {
+        "enum": [
+         "terra_only",
+         "not_observed"
+        ]
+       }
+      }
+     },
+     "then": {
+      "properties": {
+       "value": {
+        "type": "null"
+       },
+       "lo": {
+        "type": "null"
+       },
+       "hi": {
+        "type": "null"
+       }
+      }
+     }
+    },
+    {
+     "if": {
+      "properties": {
+       "source": {
+        "const": "observed_aqua"
+       }
+      }
+     },
+     "then": {
+      "properties": {
+       "value": {
+        "type": "number"
+       },
+       "method_id": {
+        "type": "null"
+       },
+       "lo": {
+        "type": "null"
+       },
+       "hi": {
+        "type": "null"
+       }
+      }
+     }
+    },
+    {
+     "if": {
+      "properties": {
+       "source": {
+        "enum": [
+         "modelled_from_viirs",
+         "blended"
+        ]
+       }
+      }
+     },
+     "then": {
+      "properties": {
+       "value": {
+        "type": "number"
+       },
+       "method_id": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   ]
+  },
+  "month_row": {
+   "type": "object",
+   "required": [
+    "month",
+    "era",
+    "held_out",
+    "split",
+    "native",
+    "modelled",
+    "record",
+    "quality"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "month": {
+     "$ref": "#/$defs/month"
+    },
+    "era": {
+     "enum": [
+      "terra_only",
+      "modis_only",
+      "overlap",
+      "aqua_drift",
+      "post_modis"
+     ]
+    },
+    "held_out": {
+     "type": "boolean",
+     "description": "True if this month's year is a held-out validation year for the region's method. Frontend must not show modelled-vs-Aqua agreement as validation unless held_out."
+    },
+    "split": {
+     "enum": [
+      "train",
+      "held_out",
+      "calibration_free",
+      "none"
+     ]
+    },
+    "native": {
+     "type": "object",
+     "required": [
+      "terra",
+      "aqua",
+      "snpp",
+      "noaa20",
+      "noaa21"
+     ],
+     "additionalProperties": false,
+     "properties": {
+      "terra": {
+       "$ref": "#/$defs/native_cell"
+      },
+      "aqua": {
+       "$ref": "#/$defs/native_cell"
+      },
+      "snpp": {
+       "$ref": "#/$defs/native_cell"
+      },
+      "noaa20": {
+       "$ref": "#/$defs/native_cell"
+      },
+      "noaa21": {
+       "$ref": "#/$defs/native_cell"
+      }
+     }
+    },
+    "modelled": {
+     "type": "object",
+     "required": [
+      "aqua_equiv_operator",
+      "aqua_equiv_ratio"
+     ],
+     "additionalProperties": {
+      "$ref": "#/$defs/modelled_cell"
+     },
+     "properties": {
+      "aqua_equiv_operator": {
+       "$ref": "#/$defs/modelled_cell"
+      },
+      "aqua_equiv_ratio": {
+       "$ref": "#/$defs/modelled_cell"
+      }
+     }
+    },
+    "record": {
+     "$ref": "#/$defs/record_cell"
+    },
+    "quality": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+     }
+    },
+    "verdict": {
+     "type": "object",
+     "required": [
+      "class",
+      "rule_id"
+     ],
+     "additionalProperties": false,
+     "description": "Descriptive screening of record vs baseline for this calendar month. Optional (1.1.0). Not a significance test.",
+     "properties": {
+      "class": {
+       "enum": [
+        "above",
+        "within",
+        "below",
+        "cant_tell"
+       ]
+      },
+      "rule_id": {
+       "type": "string"
+      },
+      "reason": {
+       "type": "string",
+       "description": "Why cant_tell, e.g. no_record, few_baseline_years, interval_straddles, low_count_modelled."
+      }
+     }
+    }
+   }
+  },
+  "value_kind": {
+   "enum": [
+    "observed",
+    "raw_viirs",
+    "raw_terra",
+    "converted_validated",
+    "converted_unvalidated",
+    "unavailable"
+   ],
+   "description": "Added 1.4.0 (optional; required for tier m2_primary regions). observed = measured Aqua; raw_viirs / raw_terra = a native count on its own scale, never compared directly with Aqua; converted_validated = M2 held-out NOAA-20 -> Aqua-scale prediction (2018-04..2021-12, m2_primary regions only, Aqua hidden when made); converted_unvalidated = any other converted value; unavailable = no value (never zero)."
+  }
+ }
+}

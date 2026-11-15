@@ -1,0 +1,1561 @@
+{
+ "contract_version": "1.4.0",
+ "file": "sensors",
+ "kind": "real",
+ "as_of": "2026-11-09",
+ "missions": [
+  {
+   "platform": "terra",
+   "instrument": "MODIS",
+   "label": "Terra MODIS",
+   "nominal_overpass_local": null,
+   "native_pixel_m_nadir": 1000,
+   "firms_codes": [
+    "Terra"
+   ],
+   "events": [
+    {
+     "kind": "launch",
+     "date": "1999-12",
+     "date_precision": "month",
+     "status": "actual",
+     "projected": false,
+     "source": "CAMS 2026-02-25 article: https://atmosphere.copernicus.eu/drifting-away-modis-cams-global-fire-assimilation-system",
+     "source_ref": "docs/research/CONTEXT-SOURCES.md \u00a77",
+     "note": "Launched in December 1999 (Terra)"
+    },
+    {
+     "kind": "archive_start",
+     "date": "2000-11-01",
+     "date_precision": "day",
+     "status": "actual",
+     "projected": false,
+     "source": "FIRMS yearly country archive (https://firms.modaps.eosdis.nasa.gov/data/country/zips/); first acq_date in data/processed/global_daily_counts.parquet (provenance: data/processed/provenance.json)",
+     "source_ref": null,
+     "note": "First day with detections in the FIRMS yearly archive as ingested (data availability)."
+    },
+    {
+     "kind": "drift_start",
+     "date": "2020",
+     "date_precision": "year",
+     "status": "actual",
+     "projected": false,
+     "source": "science.nasa.gov Terra article: https://science.nasa.gov/science-research/earth-science/terra-the-end-of-an-era",
+     "source_ref": "docs/research/CONTEXT-SOURCES.md \u00a77",
+     "note": "Earlier crossing; 10:15 AM by fall 2022"
+    },
+    {
+     "kind": "other",
+     "date": "2020-02-27",
+     "date_precision": "day",
+     "status": "actual",
+     "projected": false,
+     "source": "MODIS Land news: https://modis-land.gsfc.nasa.gov/news.html",
+     "source_ref": "docs/research/CONTEXT-SOURCES.md \u00a77",
+     "note": "Last orbit maneuver; stops holding its morning crossing time"
+    },
+    {
+     "kind": "constellation_exit",
+     "date": "2022-10",
+     "date_precision": "month",
+     "status": "actual",
+     "projected": false,
+     "source": "MODIS Land news https://modis-land.gsfc.nasa.gov/news.html; LAADS alert 2022-10-28 https://ladsweb.modaps.eosdis.nasa.gov/alerts-and-issues/171790",
+     "source_ref": "docs/research/CONTEXT-SOURCES.md \u00a77",
+     "note": "Constellation exit; lowered to 694 km"
+    },
+    {
+     "kind": "other",
+     "date": "2026-03-26",
+     "date_precision": "day",
+     "status": "actual",
+     "projected": false,
+     "source": "Earthdata alert: https://www.earthdata.nasa.gov/data/alerts-outages/modis-terra-placed-standby-mode",
+     "source_ref": "docs/research/CONTEXT-SOURCES.md \u00a77",
+     "note": "MODIS standby outage; resumed 2026-03-27 19:23 UTC"
+    },
+    {
+     "kind": "projected_end_of_science",
+     "date": "2027-02",
+     "date_precision": "month",
+     "status": "projected",
+     "projected": true,
+     "source": "science.nasa.gov editor's note (updated 2026-03-20): https://science.nasa.gov/science-research/earth-science/terra-the-end-of-an-era",
+     "source_ref": "docs/research/CONTEXT-SOURCES.md \u00a77",
+     "note": "CAMS says data collection ends 2027-01"
+    }
+   ]
+  },
+  {
+   "platform": "aqua",
+   "instrument": "MODIS",
+   "label": "Aqua MODIS",
+   "nominal_overpass_local": null,
+   "native_pixel_m_nadir": 1000,
+   "firms_codes": [
+    "Aqua"
+   ],
+   "events": [
+    {
+     "kind": "launch",
+     "date": "2002-05-04",
+     "date_precision": "day",
+     "status": "actual",
+     "projected": false,
+     "source": "science.nasa.gov Aqua mission page: https://science.nasa.gov/mission/aqua/ ('Aqua was launched on May 4, 2002')",
+     "source_ref": "https://science.nasa.gov/mission/aqua/",
+     "note": "retrieved 2026-11-10"
+    },
+    {
+     "kind": "archive_start",
+     "date": "2002-07-04",
+     "date_precision": "day",
+     "status": "actual",
+     "projected": false,
+     "source": "FIRMS yearly country archive (https://firms.modaps.eosdis.nasa.gov/data/country/zips/); first acq_date in data/processed/global_daily_counts.parquet (provenance: data/processed/provenance.json)",
+     "source_ref": null,
+     "note": "First day with detections in the FIRMS yearly archive as ingested (data availability)."
+    },
+    {
+     "kind": "other",
+     "date": "2021-03-18",
+     "date_precision": "day",
+     "status": "actual",
+     "projected": false,
+     "source": "MODIS Land news: https://modis-land.gsfc.nasa.gov/news.html",
+     "source_ref": "docs/research/CONTEXT-SOURCES.md \u00a77",
+     "note": "Final inclination maneuver"
+    },
+    {
+     "kind": "drift_start",
+     "date": "2021-07",
+     "date_precision": "month",
+     "status": "actual",
+     "projected": false,
+     "source": "MODIS Land news: https://modis-land.gsfc.nasa.gov/news.html",
+     "source_ref": "docs/research/CONTEXT-SOURCES.md \u00a77",
+     "note": "Crossing time moves later"
+    },
+    {
+     "kind": "constellation_exit",
+     "date": "2022-01",
+     "date_precision": "month",
+     "status": "actual",
+     "projected": false,
+     "source": "MODIS Land news: https://modis-land.gsfc.nasa.gov/news.html",
+     "source_ref": "docs/research/CONTEXT-SOURCES.md \u00a77",
+     "note": "Constellation exit begins; crossed 1:45 PM in Feb 2023"
+    },
+    {
+     "kind": "other",
+     "date": "2026-08",
+     "date_precision": "month",
+     "status": "projected",
+     "projected": true,
+     "source": "MODIS Land news: https://modis-land.gsfc.nasa.gov/news.html",
+     "source_ref": "docs/research/CONTEXT-SOURCES.md \u00a77",
+     "note": "Crossing about 15:50 projected; reaching this value is not confirmed"
+    },
+    {
+     "kind": "projected_end_of_science",
+     "date": "2027-09",
+     "date_precision": "month",
+     "status": "projected",
+     "projected": true,
+     "source": "science.nasa.gov editor's note (updated 2026-03-20): https://science.nasa.gov/science-research/earth-science/terra-the-end-of-an-era",
+     "source_ref": "docs/research/CONTEXT-SOURCES.md \u00a77",
+     "note": "Older pages said 2026-08 (superseded)"
+    }
+   ]
+  },
+  {
+   "platform": "snpp",
+   "instrument": "VIIRS",
+   "label": "Suomi NPP VIIRS (375 m)",
+   "nominal_overpass_local": null,
+   "native_pixel_m_nadir": 375,
+   "firms_codes": [
+    "N"
+   ],
+   "events": [
+    {
+     "kind": "launch",
+     "date": "2011-10-28",
+     "date_precision": "day",
+     "status": "actual",
+     "projected": false,
+     "source": "science.nasa.gov Suomi NPP mission page: https://science.nasa.gov/mission/suomi-npp/ (Launch: Oct. 28, 2011)",
+     "source_ref": "Oct. 28, 2011)",
+     "note": "retrieved 2026-11-10"
+    },
+    {
+     "kind": "archive_start",
+     "date": "2012-01-20",
+     "date_precision": "day",
+     "status": "actual",
+     "projected": false,
+     "source": "FIRMS yearly country archive (https://firms.modaps.eosdis.nasa.gov/data/country/zips/); first acq_date in data/processed/global_daily_counts.parquet (provenance: data/processed/provenance.json)",
+     "source_ref": null,
+     "note": "First day with detections in the FIRMS yearly archive as ingested (data availability)."
+    },
+    {
+     "kind": "archive_end",
+     "date": "2026-11-02",
+     "date_precision": "day",
+     "status": "actual",
+     "projected": false,
+     "source": "FIRMS blog https://www.earthdata.nasa.gov/news/blog/transitioning-from-suomi-npp-viirs-omps-what-firms-users-need-know and FAQ https://www.earthdata.nasa.gov/data/tools/firms/faq",
+     "source_ref": "docs/research/CONTEXT-SOURCES.md \u00a77",
+     "note": "Last data from this platform in the FIRMS archive (data availability only; this is not a statement about the satellite's operating status). Ceased 13:00 UTC"
+    }
+   ]
+  },
+  {
+   "platform": "noaa20",
+   "instrument": "VIIRS",
+   "label": "NOAA-20 VIIRS (375 m)",
+   "nominal_overpass_local": null,
+   "native_pixel_m_nadir": 375,
+   "firms_codes": [
+    "N20"
+   ],
+   "events": [
+    {
+     "kind": "launch",
+     "date": "2017-11-18",
+     "date_precision": "day",
+     "status": "actual",
+     "projected": false,
+     "source": "Earthdata NOAA-20 platform page: https://www.earthdata.nasa.gov/data/platforms/space-based-platforms/noaa-20 (Launch: November 18, 2017)",
+     "source_ref": "November 18, 2017)",
+     "note": "retrieved 2026-11-10"
+    },
+    {
+     "kind": "archive_start",
+     "date": "2018-04-01",
+     "date_precision": "day",
+     "status": "actual",
+     "projected": false,
+     "source": "FIRMS yearly country archive (https://firms.modaps.eosdis.nasa.gov/data/country/zips/); first acq_date in data/processed/global_daily_counts.parquet (provenance: data/processed/provenance.json)",
+     "source_ref": null,
+     "note": "First day with detections in the FIRMS yearly archive as ingested (data availability)."
+    }
+   ]
+  },
+  {
+   "platform": "noaa21",
+   "instrument": "VIIRS",
+   "label": "NOAA-21 VIIRS (375 m)",
+   "nominal_overpass_local": null,
+   "native_pixel_m_nadir": 375,
+   "firms_codes": [],
+   "events": [
+    {
+     "kind": "launch",
+     "date": "2022",
+     "date_precision": "year",
+     "status": "actual",
+     "projected": false,
+     "source": "VIIRS 375 m User Guide v1.2 section 1: https://www.earthdata.nasa.gov/s3fs-public/2025-06/VIIRS_C2_AF-375m_User_Guide_1.2.pdf",
+     "source_ref": "docs/research/CONTEXT-SOURCES.md \u00a77",
+     "note": "Launch year from VIIRS 375 m UG section 1. FIRMS custom archive from 2023-03 (per docs/DATA-AUDIT.md, FIRMS download page); not ingested in this project; no yearly country zip."
+    }
+   ]
+  }
+ ],
+ "notes": [
+  "Rows copied from docs/research/CONTEXT-SOURCES.md section 7 (hackathon-strategist); no other events added. Exact launch dates for Aqua, S-NPP and NOAA-20 added 2026-11-10 from the cited official pages.",
+  "Projected dates are projections, not events that have happened.",
+  "archive_start/archive_end describe FIRMS data availability, not satellite life."
+ ],
+ "overpass_lst": [
+  {
+   "platform": "aqua",
+   "year": 2003,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.207,
+   "iqr_h": null,
+   "n": 13082,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2003.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2004,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.231,
+   "iqr_h": null,
+   "n": 12831,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2004.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2005,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.194,
+   "iqr_h": null,
+   "n": 18671,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2005.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2006,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.255,
+   "iqr_h": null,
+   "n": 12363,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2006.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2007,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.239,
+   "iqr_h": null,
+   "n": 16844,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2007.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2008,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.278,
+   "iqr_h": null,
+   "n": 17244,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2008.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2009,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.299,
+   "iqr_h": null,
+   "n": 17208,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2009.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2010,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.267,
+   "iqr_h": null,
+   "n": 17343,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2010.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2011,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.27,
+   "iqr_h": null,
+   "n": 17532,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2011.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2012,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.283,
+   "iqr_h": null,
+   "n": 20858,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2012.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2013,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.268,
+   "iqr_h": null,
+   "n": 18451,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2013.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2014,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.271,
+   "iqr_h": null,
+   "n": 19330,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2014.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2015,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.291,
+   "iqr_h": null,
+   "n": 15756,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2015.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2016,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.282,
+   "iqr_h": null,
+   "n": 22954,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2016.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2017,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.282,
+   "iqr_h": null,
+   "n": 16821,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2017.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2018,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.288,
+   "iqr_h": null,
+   "n": 18539,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2018.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2019,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.23,
+   "iqr_h": null,
+   "n": 15066,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2019.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2020,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.286,
+   "iqr_h": null,
+   "n": 20681,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2020.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2021,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.292,
+   "iqr_h": null,
+   "n": 22761,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2021.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2022,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.345,
+   "iqr_h": null,
+   "n": 16139,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2022.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2023,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.608,
+   "iqr_h": null,
+   "n": 12173,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2023.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2024,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.965,
+   "iqr_h": null,
+   "n": 9170,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2024.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2025,
+   "daynight": "D",
+   "median_local_solar_time_h": 14.588,
+   "iqr_h": null,
+   "n": 7343,
+   "region_scope": "punjab_haryana",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.punjab_haryana.2025.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2003,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.652,
+   "iqr_h": null,
+   "n": 26838,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2003.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2004,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.677,
+   "iqr_h": null,
+   "n": 45515,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2004.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2005,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.656,
+   "iqr_h": null,
+   "n": 30084,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2005.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2006,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.687,
+   "iqr_h": null,
+   "n": 40612,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2006.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2007,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.712,
+   "iqr_h": null,
+   "n": 34388,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2007.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2008,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.715,
+   "iqr_h": null,
+   "n": 31804,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2008.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2009,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.755,
+   "iqr_h": null,
+   "n": 37141,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2009.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2010,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.729,
+   "iqr_h": null,
+   "n": 20379,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2010.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2011,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.704,
+   "iqr_h": null,
+   "n": 38600,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2011.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2012,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.719,
+   "iqr_h": null,
+   "n": 48622,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2012.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2013,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.714,
+   "iqr_h": null,
+   "n": 25438,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2013.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2014,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.717,
+   "iqr_h": null,
+   "n": 42367,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2014.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2015,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.72,
+   "iqr_h": null,
+   "n": 39831,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2015.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2016,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.713,
+   "iqr_h": null,
+   "n": 24755,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2016.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2017,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.715,
+   "iqr_h": null,
+   "n": 27638,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2017.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2018,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.72,
+   "iqr_h": null,
+   "n": 42002,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2018.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2019,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.705,
+   "iqr_h": null,
+   "n": 35788,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2019.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2020,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.719,
+   "iqr_h": null,
+   "n": 22611,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2020.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2021,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.695,
+   "iqr_h": null,
+   "n": 33508,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2021.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2022,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.775,
+   "iqr_h": null,
+   "n": 30796,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2022.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2023,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.978,
+   "iqr_h": null,
+   "n": 35990,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2023.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2024,
+   "daynight": "D",
+   "median_local_solar_time_h": 14.341,
+   "iqr_h": null,
+   "n": 33645,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2024.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2025,
+   "daynight": "D",
+   "median_local_solar_time_h": 14.901,
+   "iqr_h": null,
+   "n": 32784,
+   "region_scope": "n_australia_topend",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.n_australia_topend.2025.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2003,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.166,
+   "iqr_h": null,
+   "n": 4411,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2003.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2004,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.106,
+   "iqr_h": null,
+   "n": 3899,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2004.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2005,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.014,
+   "iqr_h": null,
+   "n": 5453,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2005.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2006,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.058,
+   "iqr_h": null,
+   "n": 2923,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2006.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2007,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.068,
+   "iqr_h": null,
+   "n": 1844,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2007.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2008,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.117,
+   "iqr_h": null,
+   "n": 1563,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2008.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2009,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.179,
+   "iqr_h": null,
+   "n": 2610,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2009.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2010,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.123,
+   "iqr_h": null,
+   "n": 2202,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2010.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2011,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.061,
+   "iqr_h": null,
+   "n": 2625,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2011.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2012,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.114,
+   "iqr_h": null,
+   "n": 2644,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2012.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2013,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.112,
+   "iqr_h": null,
+   "n": 2562,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2013.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2014,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.041,
+   "iqr_h": null,
+   "n": 859,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2014.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2015,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.157,
+   "iqr_h": null,
+   "n": 1684,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2015.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2016,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.118,
+   "iqr_h": null,
+   "n": 2359,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2016.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2017,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.153,
+   "iqr_h": null,
+   "n": 3087,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2017.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2018,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.14,
+   "iqr_h": null,
+   "n": 868,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2018.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2019,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.076,
+   "iqr_h": null,
+   "n": 1230,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2019.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2020,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.092,
+   "iqr_h": null,
+   "n": 1070,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2020.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2021,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.093,
+   "iqr_h": null,
+   "n": 1014,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2021.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2022,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.143,
+   "iqr_h": null,
+   "n": 2003,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2022.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2023,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.287,
+   "iqr_h": null,
+   "n": 854,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2023.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2024,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.624,
+   "iqr_h": null,
+   "n": 1181,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2024.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2025,
+   "daynight": "D",
+   "median_local_solar_time_h": 14.382,
+   "iqr_h": null,
+   "n": 4312,
+   "region_scope": "iberia_control",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.iberia_control.2025.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2003,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.449,
+   "iqr_h": null,
+   "n": 112324,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2003.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2004,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.476,
+   "iqr_h": null,
+   "n": 109435,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2004.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2005,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.468,
+   "iqr_h": null,
+   "n": 113706,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2005.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2006,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.479,
+   "iqr_h": null,
+   "n": 105604,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2006.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2007,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.504,
+   "iqr_h": null,
+   "n": 109869,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2007.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2008,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.522,
+   "iqr_h": null,
+   "n": 120489,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2008.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2009,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.559,
+   "iqr_h": null,
+   "n": 88265,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2009.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2010,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.531,
+   "iqr_h": null,
+   "n": 92801,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2010.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2011,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.494,
+   "iqr_h": null,
+   "n": 116121,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2011.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2012,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.501,
+   "iqr_h": null,
+   "n": 95075,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2012.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2013,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.504,
+   "iqr_h": null,
+   "n": 99614,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2013.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2014,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.518,
+   "iqr_h": null,
+   "n": 104644,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2014.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2015,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.519,
+   "iqr_h": null,
+   "n": 111562,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2015.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2016,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.515,
+   "iqr_h": null,
+   "n": 124437,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2016.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2017,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.52,
+   "iqr_h": null,
+   "n": 99195,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2017.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2018,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.486,
+   "iqr_h": null,
+   "n": 108811,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2018.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2019,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.504,
+   "iqr_h": null,
+   "n": 92143,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2019.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2020,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.524,
+   "iqr_h": null,
+   "n": 110557,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2020.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2021,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.515,
+   "iqr_h": null,
+   "n": 100142,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2021.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2022,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.58,
+   "iqr_h": null,
+   "n": 108687,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2022.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2023,
+   "daynight": "D",
+   "median_local_solar_time_h": 13.738,
+   "iqr_h": null,
+   "n": 87237,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2023.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2024,
+   "daynight": "D",
+   "median_local_solar_time_h": 14.087,
+   "iqr_h": null,
+   "n": 101279,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2024.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  },
+  {
+   "platform": "aqua",
+   "year": 2025,
+   "daynight": "D",
+   "median_local_solar_time_h": 14.526,
+   "iqr_h": null,
+   "n": 84466,
+   "region_scope": "car_sudanian",
+   "source_ref": {
+    "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+    "key": "A1_geo_lst.by_region.car_sudanian.2025.median_lst_h"
+   },
+   "note": "Median mean-solar local time (acq_time + lon/15) of Aqua daytime type-0 detections in this region's clip; a measured drift proxy, not orbit telemetry. IQR not computed."
+  }
+ ]
+}

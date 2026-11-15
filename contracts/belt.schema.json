@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "belt.schema.json",
+  "title": "site/data/global/belt.json",
+  "description": "Fire Belt Atlas: Aqua-MODIS-only climatology (default 2003-2011, single sensor, no harmonization involved). 1-degree cells as mean annual detections per 1,000 km2 of land, plus latitude-band x month share of annual detections.",
+  "type": "object",
+  "required": ["contract_version", "file", "kind", "dataset_version", "platform", "period", "daynight", "filter_id", "grid", "unit", "cell_columns", "cells", "bands"],
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {"type": "string", "pattern": "^1\\.[0-9]+\\.[0-9]+$"},
+    "file": {"const": "belt"},
+    "kind": {"enum": ["real", "fixture"]},
+    "watermark": {"type": "string", "minLength": 1},
+    "dataset_version": {"type": "string"},
+    "platform": {"const": "aqua"},
+    "period": {
+      "type": "object", "required": ["start", "end", "n_years"], "additionalProperties": false,
+      "properties": {
+        "start": {"type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"},
+        "end": {"type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"},
+        "n_years": {"type": "integer", "minimum": 1}
+      }
+    },
+    "daynight": {"enum": ["D", "N", "DN"]},
+    "filter_id": {"type": "string"},
+    "grid": {
+      "type": "object", "required": ["resolution_deg", "anchor", "min_land_km2", "land_source"], "additionalProperties": false,
+      "properties": {
+        "resolution_deg": {"const": 1},
+        "anchor": {"const": "southwest_corner", "description": "lat_bin = floor(latitude), lon_bin = floor(longitude). Cell spans [lat_bin, lat_bin+1) x [lon_bin, lon_bin+1)."},
+        "min_land_km2": {"type": "number", "minimum": 0, "description": "Cells with less land than this are omitted (density unstable)."},
+        "land_source": {"type": "string", "description": "Land mask used for area, e.g. 'Natural Earth 1:50m land, equal-area pyproj'."}
+      }
+    },
+    "unit": {
+      "type": "object", "required": ["id", "label"], "additionalProperties": false,
+      "properties": {
+        "id": {"const": "detections_per_1000km2_land_per_year"},
+        "label": {"type": "string"},
+        "definition": {"type": "string"}
+      }
+    },
+    "cell_columns": {"const": ["lat_bin", "lon_bin", "value", "n_total", "land_km2"]},
+    "cells": {
+      "type": "array",
+      "description": "Every land cell >= min_land_km2, INCLUDING zero-detection cells (value 0 = no Aqua detections reported in the period; not proof of no fire). Omitted cells = ocean or below min_land_km2.",
+      "items": {
+        "type": "array", "minItems": 5, "maxItems": 5,
+        "prefixItems": [
+          {"type": "integer", "minimum": -90, "maximum": 89},
+          {"type": "integer", "minimum": -180, "maximum": 179},
+          {"type": "number", "minimum": 0},
+          {"type": "integer", "minimum": 0},
+          {"type": "number", "minimum": 0}
+        ]
+      }
+    },
+    "bands": {
+      "type": "object", "required": ["band_deg", "rows"], "additionalProperties": false,
+      "properties": {
+        "band_deg": {"type": "number", "exclusiveMinimum": 0},
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object", "required": ["lat_min", "lat_max", "n_total", "monthly_share"], "additionalProperties": false,
+            "properties": {
+              "lat_min": {"type": "number", "minimum": -90, "maximum": 90},
+              "lat_max": {"type": "number", "minimum": -90, "maximum": 90},
+              "n_total": {"type": "integer", "minimum": 0},
+              "land_km2": {"type": ["number", "null"]},
+              "monthly_share": {
+                "description": "12 values Jan..Dec, share of the band's period-total detections falling in each calendar month (sums to 1). null when n_total is 0.",
+                "anyOf": [
+                  {"type": "array", "minItems": 12, "maxItems": 12, "items": {"type": "number", "minimum": 0, "maximum": 1}},
+                  {"type": "null"}
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "notes": {"type": "array", "items": {"type": "string"}}
+  },
+  "if": {"properties": {"kind": {"const": "fixture"}}},
+  "then": {"required": ["watermark"]}
+}

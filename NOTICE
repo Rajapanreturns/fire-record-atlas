@@ -1,0 +1,15 @@
+Fire Record Atlas (NASA Space Apps Challenge 2026)
+
+The original code and documentation in this repository are licensed under the Apache License, Version 2.0 (see LICENSE). The NASA Space Apps Challenge terms say NASA distributes original content under Apache 2.0 when no other OSI licence is named, so this is that default, stated explicitly.
+
+The Apache 2.0 licence does NOT cover the following material, which remains under its own terms:
+
+Data
+- NASA FIRMS active-fire / hotspot detections: MODIS Collection 6.1 and VIIRS 375 m (Suomi NPP, NOAA-20). These are NASA data and are not owned by this project; NASA's open data policy applies. The processed aggregates in site/data/ are derived from them. Citation: see README.md, "Data and citations".
+- Natural Earth land boundaries (via world-atlas land-110m): public domain.
+
+Vendored software and fonts (site/vendor/, licence texts alongside; versions and hashes in site/vendor/VENDOR.md)
+- d3 v7.9.0: ISC licence (site/vendor/LICENSE-d3.txt)
+- topojson-client v3.1.0: ISC licence (site/vendor/LICENSE-topojson-client.txt)
+- world-atlas land-110m: ISC licence; data from Natural Earth (site/vendor/LICENSE-world-atlas.txt)
+- Archivo, IBM Plex Mono, Source Serif 4: SIL Open Font License 1.1 (site/vendor/fonts/LICENSE-*.txt)

@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "belt_monthly.schema.json",
+  "title": "site/data/global/belt_monthly.json",
+  "description": "Added in 1.3.0 (optional global layer, manifest.global_layers id 'belt_monthly'). Aqua-MODIS-only calendar-month climatology on the SAME 1-degree land cells as belt.json, in the same order (aligned_to). Default DAYTIME only (belt.json is day+night). Stores integer period-total counts; the client derives density. Single sensor; no harmonization involved.",
+  "type": "object",
+  "required": ["contract_version", "file", "kind", "dataset_version", "platform", "period", "daynight", "filter_id", "grid", "aligned_to", "unit", "month_columns", "counts", "sparse", "sparse_rule", "bands", "provenance", "notes"],
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {"type": "string", "pattern": "^1\\.([3-9]|[1-9][0-9])\\.[0-9]+$", "description": "belt_monthly exists from 1.3.0."},
+    "file": {"const": "belt_monthly"},
+    "kind": {"enum": ["real", "fixture"]},
+    "watermark": {"type": "string", "minLength": 1},
+    "dataset_version": {"type": "string", "minLength": 1, "description": "Equals belt.json dataset_version."},
+    "platform": {"const": "aqua"},
+    "period": {
+      "type": "object", "required": ["start", "end", "n_years"], "additionalProperties": false,
+      "description": "Equals belt.json period.",
+      "properties": {
+        "start": {"type": "string", "pattern": "^[0-9]{4}-01$"},
+        "end": {"type": "string", "pattern": "^[0-9]{4}-12$"},
+        "n_years": {"type": "integer", "minimum": 1, "maximum": 9}
+      }
+    },
+    "daynight": {"enum": ["D", "N", "DN"], "description": "Production layer is 'D' (daytime only), matching the region calendar and baseline."},
+    "filter_id": {"type": "string", "description": "Equals belt.json filter_id."},
+    "grid": {
+      "type": "object", "required": ["resolution_deg", "anchor", "min_land_km2", "land_source"], "additionalProperties": false,
+      "description": "Copied from belt.json grid.",
+      "properties": {
+        "resolution_deg": {"const": 1},
+        "anchor": {"const": "southwest_corner"},
+        "min_land_km2": {"type": "number", "minimum": 0},
+        "land_source": {"type": "string"}
+      }
+    },
+    "aligned_to": {
+      "type": "object", "required": ["file", "path", "n_cells", "sha256", "key_columns", "land_column"], "additionalProperties": false,
+      "description": "counts[i], sparse[i] and years_seen[i] describe belt.cells[i]. lat_bin, lon_bin and land_km2 are NOT repeated here: read them from belt.cells[i].",
+      "properties": {
+        "file": {"const": "belt"},
+        "path": {"type": "string", "description": "Relative to the data dir, e.g. global/belt.json."},
+        "n_cells": {"type": "integer", "minimum": 0},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$", "description": "sha256 of the belt.json bytes this file was built against. The validator fails on mismatch (belt.json rebuilt without rebuilding belt_monthly)."},
+        "key_columns": {"const": ["lat_bin", "lon_bin"]},
+        "land_column": {"const": "land_km2"}
+      }
+    },
+    "unit": {
+      "type": "object", "required": ["id", "label", "stored", "definition"], "additionalProperties": false,
+      "properties": {
+        "id": {"const": "detections_per_1000km2_land_per_month"},
+        "label": {"type": "string"},
+        "stored": {"const": "counts", "description": "The file stores counts; display value = counts[i][m-1] / period.n_years / belt.cells[i][4] x 1000."},
+        "definition": {"type": "string"}
+      }
+    },
+    "month_columns": {"const": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]},
+    "counts": {
+      "type": "array",
+      "description": "One row per belt cell, 12 integers Jan..Dec: total detections in that calendar month summed over all period years. 0 = no detections reported (not proof of no fire).",
+      "items": {"type": "array", "minItems": 12, "maxItems": 12, "items": {"type": "integer", "minimum": 0}}
+    },
+    "sparse": {
+      "type": "array",
+      "description": "One integer bitmask per cell. Bit m-1 (m = 1..12) set = that cell-month is sparse under sparse_rule. Bit 12 (value 4096) = the all-year total is sparse. Zero counts are never sparse.",
+      "items": {"type": "integer", "minimum": 0, "maximum": 8191}
+    },
+    "years_seen": {
+      "type": "array",
+      "description": "Optional. One 12-character string per cell; character m-1 is the number of period years (0..n_years) in which the cell had >= 1 detection in calendar month m. Drop it to save ~60 KB gzip; the UI must tolerate its absence.",
+      "items": {"type": "string", "pattern": "^[0-9]{12}$"}
+    },
+    "sparse_rule": {
+      "type": "object", "required": ["id", "min_total", "max_years_seen", "n_years", "all_year_bit", "definition"], "additionalProperties": false,
+      "properties": {
+        "id": {"const": "lt10_or_seen_le2_v1"},
+        "min_total": {"type": "integer", "minimum": 1},
+        "max_years_seen": {"type": "integer", "minimum": 0},
+        "n_years": {"type": "integer", "minimum": 1},
+        "all_year_bit": {"const": 12},
+        "definition": {"type": "string"}
+      }
+    },
+    "bands": {
+      "type": "object", "required": ["band_deg", "rows"], "additionalProperties": false,
+      "description": "Latitude bands (same edges as belt.bands) with 12 calendar-month counts, same day/night and filter as the cells. Includes detections in cells omitted for low land area.",
+      "properties": {
+        "band_deg": {"type": "number", "exclusiveMinimum": 0},
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object", "required": ["lat_min", "lat_max", "n_total", "counts"], "additionalProperties": false,
+            "properties": {
+              "lat_min": {"type": "number", "minimum": -90, "maximum": 90},
+              "lat_max": {"type": "number", "minimum": -90, "maximum": 90},
+              "n_total": {"type": "integer", "minimum": 0},
+              "counts": {"type": "array", "minItems": 12, "maxItems": 12, "items": {"type": "integer", "minimum": 0}}
+            }
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object", "additionalProperties": true,
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "object", "required": ["path", "sha256"], "additionalProperties": true,
+            "properties": {"path": {"type": "string"}, "sha256": {"type": ["string", "null"]}}
+          }
+        },
+        "generated_by": {"type": "object"}
+      }
+    },
+    "notes": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+  },
+  "if": {"properties": {"kind": {"const": "fixture"}}},
+  "then": {"required": ["watermark"]}
+}

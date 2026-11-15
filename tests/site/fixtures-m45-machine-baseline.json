@@ -1,0 +1,155 @@
+{
+ "se_asia_mainland|2021-03": {
+  "model": {
+   "raw": 59391,
+   "pred": 15297.5461,
+   "lo": 7384.1972,
+   "hi": 19915.1843,
+   "actual": 14812,
+   "envLo": 7275.8,
+   "envHi": 39186.2,
+   "rawVerdict": "above",
+   "ratioTxt": "3.9",
+   "side": "inside",
+   "apart": 486,
+   "axisMax": 62954.46000000001,
+   "ticks": [
+    0,
+    20000,
+    40000,
+    60000
+   ],
+   "year": 2021,
+   "mi": 2
+  },
+  "copy": [
+   {
+    "head": "NOAA-20, read raw.",
+    "line": "That’s above Aqua’s usual March, but VIIRS sees smaller hotspots."
+   },
+   {
+    "head": "Converted to Aqua’s scale.",
+    "line": "Ratio and range fitted on other years; only this month’s NOAA-20 count goes in."
+   },
+   {
+    "head": "Inside the 90% range.",
+    "line": "One genuine held-out example, not a guarantee: 40 of 43 test months here landed inside."
+   }
+  ]
+ },
+ "se_asia_mainland|2021-10": {
+  "model": {
+   "raw": 57,
+   "pred": 5.6651,
+   "lo": 2.0896,
+   "hi": 7.6816,
+   "actual": 10,
+   "envLo": 10.2,
+   "envHi": 43.6,
+   "rawVerdict": "above",
+   "ratioTxt": "10",
+   "side": "above",
+   "apart": 4,
+   "axisMax": 60.42,
+   "ticks": [
+    0,
+    20,
+    40,
+    60
+   ],
+   "year": 2021,
+   "mi": 9
+  },
+  "copy": [
+   {
+    "head": "NOAA-20, read raw.",
+    "line": "That’s above Aqua’s usual October, but VIIRS sees smaller hotspots."
+   },
+   {
+    "head": "Converted to Aqua’s scale.",
+    "line": "Ratio and range fitted on other years; only this month’s NOAA-20 count goes in."
+   },
+   {
+    "head": "Above the 90% range.",
+    "line": "One genuine held-out example, not a guarantee: 40 of 43 test months here landed inside."
+   }
+  ]
+ },
+ "zambia_miombo|2018-05": {
+  "model": {
+   "raw": 8553,
+   "pred": 1788.6067,
+   "lo": 524.0323,
+   "hi": 3068.7951,
+   "actual": 1614,
+   "envLo": 3418.8,
+   "envHi": 10542.400000000001,
+   "rawVerdict": "within",
+   "ratioTxt": "4.8",
+   "side": "inside",
+   "apart": 175,
+   "axisMax": 11174.944000000001,
+   "ticks": [
+    0,
+    2500,
+    5000,
+    7500,
+    10000
+   ],
+   "year": 2018,
+   "mi": 4
+  },
+  "copy": [
+   {
+    "head": "NOAA-20, read raw.",
+    "line": "Raw counts aren’t on Aqua’s scale, so this comparison means little."
+   },
+   {
+    "head": "Converted to Aqua’s scale.",
+    "line": "Ratio and range fitted on other years; only this month’s NOAA-20 count goes in."
+   },
+   {
+    "head": "Inside the 90% range.",
+    "line": "One genuine held-out example, not a guarantee: 41 of 43 test months here landed inside."
+   }
+  ]
+ },
+ "zambia_miombo|2020-12": {
+  "model": {
+   "raw": 61,
+   "pred": 3.9543,
+   "lo": 0.1343,
+   "hi": 6.1315,
+   "actual": 10,
+   "envLo": 9.2,
+   "envHi": 41.2,
+   "rawVerdict": "above",
+   "ratioTxt": "15",
+   "side": "above",
+   "apart": 6,
+   "axisMax": 64.66,
+   "ticks": [
+    0,
+    20,
+    40,
+    60
+   ],
+   "year": 2020,
+   "mi": 11
+  },
+  "copy": [
+   {
+    "head": "NOAA-20, read raw.",
+    "line": "That’s above Aqua’s usual December, but VIIRS sees smaller hotspots."
+   },
+   {
+    "head": "Converted to Aqua’s scale.",
+    "line": "Ratio and range fitted on other years; only this month’s NOAA-20 count goes in."
+   },
+   {
+    "head": "Above the 90% range.",
+    "line": "One genuine held-out example, not a guarantee: 41 of 43 test months here landed inside."
+   }
+  ]
+ }
+}

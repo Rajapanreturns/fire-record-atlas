@@ -1,0 +1,1860 @@
+{
+ "contract_version": "1.4.0",
+ "file": "manifest",
+ "kind": "real",
+ "dataset_version": "m1-20261110T013217Z_primary",
+ "build_time": "2026-11-10T08:59:44Z",
+ "generated_by": {
+  "tool": "analysis/harmonize/run_eval.py",
+  "version": "harness-0.1.0"
+ },
+ "strategy": {
+  "id": "A",
+  "status": "provisional",
+  "summary": "Provisional Strategy A (pre-registered default): native Aqua wherever observed; aqua_equiv_ratio from VIIRS only where Aqua is excluded, not observed or after it ends. Not a decided splice; the drift tests (A1) have not set a switch year.",
+  "decided_on": null,
+  "evidence_ref": "analysis/results/M1_SUMMARY.md",
+  "candidates": [
+   {
+    "id": "A",
+    "label": "Native Aqua while reliable, then VIIRS-derived",
+    "status": "provisional"
+   },
+   {
+    "id": "B",
+    "label": "Splice to VIIRS-derived from 2012",
+    "status": "under_evaluation"
+   },
+   {
+    "id": "C",
+    "label": "Calibrated blend",
+    "status": "under_evaluation"
+   }
+  ]
+ },
+ "eras": [
+  {
+   "id": "terra_only",
+   "label": "Terra only",
+   "start": "2000-11",
+   "end": "2002-06",
+   "basis": "FIRMS archive: first Terra and Aqua months in the ingested data",
+   "boundary_status": "actual"
+  },
+  {
+   "id": "modis_only",
+   "label": "MODIS only",
+   "start": "2002-07",
+   "end": "2011-12",
+   "basis": "FIRMS archive; S-NPP VIIRS in FIRMS from 2012-01",
+   "boundary_status": "actual"
+  },
+  {
+   "id": "overlap",
+   "label": "MODIS + VIIRS overlap (calibration and held-out years)",
+   "start": "2012-01",
+   "end": "2021-12",
+   "basis": "PREREGISTRATION \u00a72 overlap years 2012\u20132021",
+   "boundary_status": "assumed"
+  },
+  {
+   "id": "aqua_drift",
+   "label": "Aqua drifting (separate evaluation stratum)",
+   "start": "2022-01",
+   "end": null,
+   "basis": "PREREGISTRATION \u00a72 drift stratum; Aqua drift began 2021-07 per CONTEXT-SOURCES \u00a77. Not a measured change-point (see A1 results).",
+   "boundary_status": "assumed"
+  }
+ ],
+ "sources": [
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2000_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2000
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "569669636fd149a5cbc41a9c77bef994c20a700e17011940046f12e69cf977a2"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2000_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2000
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "569669636fd149a5cbc41a9c77bef994c20a700e17011940046f12e69cf977a2"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2001_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2001
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "583d617aa3cf2c51971c4600c3a402c800047a861457f8ec5efad268b4304a5b"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2001_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2001
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "583d617aa3cf2c51971c4600c3a402c800047a861457f8ec5efad268b4304a5b"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2002_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2002
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "c6e0de8fc78daffdb10097cb2fcc7ab163b903839440a240144816db75ac6476"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2002_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2002
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "c6e0de8fc78daffdb10097cb2fcc7ab163b903839440a240144816db75ac6476"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2003_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2003
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "a199e68b9d4beacba7b527e7e9111f162e329f1de7f582c9966d4f1dcdb4f9f3"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2003_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2003
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "a199e68b9d4beacba7b527e7e9111f162e329f1de7f582c9966d4f1dcdb4f9f3"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2004_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2004
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "8b0af457b85c0831e996b172520b30c97db005704b1dbe45953e4e965cd1ac07"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2004_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2004
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "8b0af457b85c0831e996b172520b30c97db005704b1dbe45953e4e965cd1ac07"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2005_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2005
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "0beba8973ae3f0abd6556a44b7d1974f9a8d5b3d8af5cd43394ce803ccbedc28"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2005_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2005
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "0beba8973ae3f0abd6556a44b7d1974f9a8d5b3d8af5cd43394ce803ccbedc28"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2006_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2006
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "732206f60d73d92fd294dea01ad149da1dfe92536136b80f562b43a3df0d79bd"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2006_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2006
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "732206f60d73d92fd294dea01ad149da1dfe92536136b80f562b43a3df0d79bd"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2007_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2007
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "98789eb5e0ad509d96908cb173845648a4e9f122519006c461870fb48adca5c0"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2007_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2007
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "98789eb5e0ad509d96908cb173845648a4e9f122519006c461870fb48adca5c0"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2008_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2008
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "141ca567bc38537c8888206bdfa04202836607b6f17fd2017945d1900ca4e8fa"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2008_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2008
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "141ca567bc38537c8888206bdfa04202836607b6f17fd2017945d1900ca4e8fa"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2009_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2009
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "b60e69f721b962d681aa5e02e50ff574bf3ac81857b41aad347407182baf5c2c"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2009_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2009
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "b60e69f721b962d681aa5e02e50ff574bf3ac81857b41aad347407182baf5c2c"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2010_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2010
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "2c33683a2acab74efdef433c573d3342b7876eb1dc5d39318e833795fbf22999"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2010_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2010
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "2c33683a2acab74efdef433c573d3342b7876eb1dc5d39318e833795fbf22999"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2011_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2011
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "c26c94231b37745a73821a5a6ca60629f20c5e53b35122a8935a632de5b015f4"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2011_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2011
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "c26c94231b37745a73821a5a6ca60629f20c5e53b35122a8935a632de5b015f4"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2012_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2012
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "73fc214cdeb6dd924272b4bb9f34f80b90cda14b007f484a5dd3c4768e917386"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2012_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2012
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "73fc214cdeb6dd924272b4bb9f34f80b90cda14b007f484a5dd3c4768e917386"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2013_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2013
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "75047fa996f73eaa3608250da171a2af445992aebad9ee5bbe8ce5cf532ac79d"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2013_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2013
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "75047fa996f73eaa3608250da171a2af445992aebad9ee5bbe8ce5cf532ac79d"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2014_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2014
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "4c07401117af1cde8c2ede482152b030669a0bff76a077dd9b8b4c36341bf853"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2014_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2014
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "4c07401117af1cde8c2ede482152b030669a0bff76a077dd9b8b4c36341bf853"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2015_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2015
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "9a48028c03a79ed4fb7f6a807dfe42458b070f437a92716cf300cd3f4454150f"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2015_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2015
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "9a48028c03a79ed4fb7f6a807dfe42458b070f437a92716cf300cd3f4454150f"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2016_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2016
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "a43708defea6302f9bcaed1bb8172d39778f856be2bbf1adf61cdcb724b1a09d"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2016_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2016
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "a43708defea6302f9bcaed1bb8172d39778f856be2bbf1adf61cdcb724b1a09d"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2017_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2017
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "d8725fc74e3587abb8679a828a39cc2431902bf99509f372ec5ce0c24200ef05"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2017_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2017
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03;6.2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "d8725fc74e3587abb8679a828a39cc2431902bf99509f372ec5ce0c24200ef05"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2018_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2018
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "a9c0db7b8b022eeb0186c25ae8deec4d3ed5e70ed71c125b83c9b59d292b532a"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2018_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2018
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "a9c0db7b8b022eeb0186c25ae8deec4d3ed5e70ed71c125b83c9b59d292b532a"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2019_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2019
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "13a581b5d6b28741c81bf01bd27195cf3226b85a29102337f2cd3b2cabf1a517"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2019_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2019
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "13a581b5d6b28741c81bf01bd27195cf3226b85a29102337f2cd3b2cabf1a517"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2020_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2020
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "bb4c7012b8f4d89dbf24da49143c4cecbaef90cc5f504433642189201d6c0ddb"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2020_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2020
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "bb4c7012b8f4d89dbf24da49143c4cecbaef90cc5f504433642189201d6c0ddb"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2021_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2021
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "3bef964afea2d29506ede25b2299a478fa7d96a06b93bc7fc20297794979710e"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2021_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2021
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "3bef964afea2d29506ede25b2299a478fa7d96a06b93bc7fc20297794979710e"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2022_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2022
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "99b365825aa9df0638e64006af7ecadc38ccc7c14bb91bc7b16aa541be8377a0"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2022_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2022
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "6.03",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "99b365825aa9df0638e64006af7ecadc38ccc7c14bb91bc7b16aa541be8377a0"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2023_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2023
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "61.03",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "1fdd2cb87c6303dd609e2aa197e5d0ec5057921e240db51fed2f24b6d971a2e4"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2023_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2023
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "61.03",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "1fdd2cb87c6303dd609e2aa197e5d0ec5057921e240db51fed2f24b6d971a2e4"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2024_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2024
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "61.03",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "034f357da2022202fec7c4a2916e4128f29536cc1578aef9b04bbf7fd6901389"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2024_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2024
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "61.03",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "034f357da2022202fec7c4a2916e4128f29536cc1578aef9b04bbf7fd6901389"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2025_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "terra",
+   "years": [
+    2025
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "61.03",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "e4dfcfe082422625aa858c8fb0672eb8b3d0b881f3cc4b6960a85a7666ca9ab7"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/modis_2025_all_countries.zip",
+   "sensor": "MODIS",
+   "platform": "aqua",
+   "years": [
+    2025
+   ],
+   "product": "FIRMS MODIS C6.1 yearly country archive; FIRMS version labels 6.2/6.03/61.03 are undocumented (docs/DATA-AUDIT.md)",
+   "version": "61.03",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "e4dfcfe082422625aa858c8fb0672eb8b3d0b881f3cc4b6960a85a7666ca9ab7"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-jpss1_2018_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "noaa20",
+   "years": [
+    2018
+   ],
+   "product": "FIRMS VIIRS NOAA-20 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "a700e10e05a7f98bfba5c1f2e71d2c5fabd3d966961b893c22da0919edec6795"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-jpss1_2019_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "noaa20",
+   "years": [
+    2019
+   ],
+   "product": "FIRMS VIIRS NOAA-20 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "57b710c98b70defbd4bf28304704adbdb64a9621f54fac651908556c71204320"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-jpss1_2020_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "noaa20",
+   "years": [
+    2020
+   ],
+   "product": "FIRMS VIIRS NOAA-20 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "3ef226fc817647c1f5c276eaaf732a8bf1b2fbcf0c89eecd7d8ca0ee81aa8325"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-jpss1_2021_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "noaa20",
+   "years": [
+    2021
+   ],
+   "product": "FIRMS VIIRS NOAA-20 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "875468c497227aad8fbe9c6967c9eb05e5a37a2255085a26ef9748b65f48202e"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-jpss1_2022_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "noaa20",
+   "years": [
+    2022
+   ],
+   "product": "FIRMS VIIRS NOAA-20 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "e6144d08da0a2c2dfb4acb989b89c68193c2207881eaba6a92b9663e1e1dc224"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-jpss1_2023_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "noaa20",
+   "years": [
+    2023
+   ],
+   "product": "FIRMS VIIRS NOAA-20 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "644215a51e5acdd1834376be5730371471dd7beb5e1b2a5e722d8dd44c39c2f6"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-jpss1_2024_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "noaa20",
+   "years": [
+    2024
+   ],
+   "product": "FIRMS VIIRS NOAA-20 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "43a49b1d5ffd7607662c936909fa4761af3b382976145e2cfa86563a252e585c"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-jpss1_2025_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "noaa20",
+   "years": [
+    2025
+   ],
+   "product": "FIRMS VIIRS NOAA-20 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "c52dcf311ff809adb2be0cfd5f169634a7c465d0eb55de4088cc5ebe95a6b50c"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-snpp_2012_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "snpp",
+   "years": [
+    2012
+   ],
+   "product": "FIRMS VIIRS S-NPP 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "5fbf5d857d261f17c3e06f6c0d1201ec52b88ea6663e6542cc0c43a751758c9b"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-snpp_2013_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "snpp",
+   "years": [
+    2013
+   ],
+   "product": "FIRMS VIIRS S-NPP 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "084a978b2a96751c1f44350d17c00457795bce0d51de929d320522e11e2aa1ca"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-snpp_2014_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "snpp",
+   "years": [
+    2014
+   ],
+   "product": "FIRMS VIIRS S-NPP 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "f2d4e5bc578ceba9cda5f52118a3a321a46cdb14ca66fb85c05047384a59ed41"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-snpp_2015_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "snpp",
+   "years": [
+    2015
+   ],
+   "product": "FIRMS VIIRS S-NPP 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "511cd7d08699b7c48bffed3b219ad25fa82450753831db986500b1574eee04b0"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-snpp_2016_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "snpp",
+   "years": [
+    2016
+   ],
+   "product": "FIRMS VIIRS S-NPP 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "dbc2a2bd77a2e5ea7f0caf68ef4a15cf435f4267903d2cc6569bb0e5d4caa100"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-snpp_2017_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "snpp",
+   "years": [
+    2017
+   ],
+   "product": "FIRMS VIIRS S-NPP 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "5b996cd72544c549ae7e51e243f7c0f83eade7cadac4db5f0d77a96e9705e5ef"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-snpp_2018_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "snpp",
+   "years": [
+    2018
+   ],
+   "product": "FIRMS VIIRS S-NPP 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "b07430dcc76ce42d1dbb917822d1b932f5288404627b540d1e59a2266dea9ebc"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-snpp_2019_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "snpp",
+   "years": [
+    2019
+   ],
+   "product": "FIRMS VIIRS S-NPP 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "9ae38fbd33aeed67a75f1652009d43cb41e23ff0da2ea8b5100f0fd261111b84"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-snpp_2020_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "snpp",
+   "years": [
+    2020
+   ],
+   "product": "FIRMS VIIRS S-NPP 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "2095da8ff74d765d355eac3126d0349c932e5187b3ee7c9fe7eb1a8888572fe3"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-snpp_2021_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "snpp",
+   "years": [
+    2021
+   ],
+   "product": "FIRMS VIIRS S-NPP 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "5e891d8429513f6b1d8cd549b8a12bf908d0e8192094c12184f6c7855d636dcf"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-snpp_2022_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "snpp",
+   "years": [
+    2022
+   ],
+   "product": "FIRMS VIIRS S-NPP 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "b6b48250dd40672209de0523ce782bb21d86d34f502bec17cba384868c4e3b29"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-snpp_2023_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "snpp",
+   "years": [
+    2023
+   ],
+   "product": "FIRMS VIIRS S-NPP 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "782a022159bf01fcb1310077b25b46da1d58a09045ab9fe31f2e2b98c762ae15"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-snpp_2024_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "snpp",
+   "years": [
+    2024
+   ],
+   "product": "FIRMS VIIRS S-NPP 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "a38653b029d03b48868272ab2cade671d8e2df4cbcbda205ba9fdeae023e66ae"
+  },
+  {
+   "url": "https://firms.modaps.eosdis.nasa.gov/data/country/zips/viirs-snpp_2025_all_countries.zip",
+   "sensor": "VIIRS",
+   "platform": "snpp",
+   "years": [
+    2025
+   ],
+   "product": "FIRMS VIIRS S-NPP 375 m yearly country archive",
+   "version": "2",
+   "archive": "standard",
+   "retrieved": "2026-11-09",
+   "sha256": "1e6f650cc956333586c2fac0ddf86a30e3b50a5550a33541fc1254a23599e6d7"
+  }
+ ],
+ "methods": [
+  {
+   "id": "aqua_equiv_ratio",
+   "label": "Ratio baseline (kappa-shrunk ratio of sums)",
+   "role": "baseline",
+   "version": "kappa-ratio-1.0.0",
+   "value_kind": "modelled",
+   "status": "provisional",
+   "trained_on_years": [
+    2012,
+    2014,
+    2015,
+    2017,
+    2018,
+    2020,
+    2021
+   ],
+   "doc_ref": "docs/PREREGISTRATION.md"
+  },
+  {
+   "id": "aqua_clim",
+   "label": "Null reference: Aqua training-year climatology (ignores VIIRS); not a candidate",
+   "role": "baseline",
+   "version": "clim-1.0.0",
+   "value_kind": "modelled",
+   "status": "provisional",
+   "trained_on_years": [
+    2012,
+    2014,
+    2015,
+    2017,
+    2018,
+    2020,
+    2021
+   ],
+   "doc_ref": "docs/PREREGISTRATION.md"
+  },
+  {
+   "id": "aqua_equiv_operator",
+   "label": "Forward observation operator (VIIRS to simulated MODIS pixels; detection-limit constants unverified, Deviation D3); evaluated, not adopted",
+   "role": "candidate",
+   "version": "0.1.0",
+   "value_kind": "modelled",
+   "status": "provisional",
+   "trained_on_years": [
+    2012,
+    2014,
+    2015,
+    2017,
+    2018,
+    2020,
+    2021
+   ],
+   "doc_ref": "docs/research/OPERATOR-SPEC.md"
+  },
+  {
+   "id": "n20_ratio_direct",
+   "label": "NOAA-20 to Aqua-scale ratio conversion (kappa-ratio, kappa 100; M2 frozen method, Weibull intervals)",
+   "version": "m2-estimators-1.0.0|kappa-ratio-1.0.0|predictor=noaa20|kappa=100",
+   "value_kind": "modelled",
+   "status": "validated",
+   "doc_ref": "docs/m2/M2-RESULTS.md"
+  }
+ ],
+ "regions": [
+  {
+   "id": "punjab_haryana",
+   "name": "Punjab-Haryana (India/Pakistan)",
+   "role": "pilot",
+   "description": "core pilot region",
+   "bbox": [
+    73.5,
+    29.0,
+    77.5,
+    32.5
+   ],
+   "geometry_path": null,
+   "area_km2_land": 148595.5,
+   "status": "provisional",
+   "status_reason": "intervals not valid (coverage below threshold)",
+   "method": "aqua_equiv_ratio",
+   "method_version": "kappa-ratio-1.0.0",
+   "trained_on_years": [
+    2012,
+    2014,
+    2015,
+    2017,
+    2018,
+    2020,
+    2021
+   ],
+   "held_out_years": [
+    2013,
+    2016,
+    2019
+   ],
+   "latest_standard_month": "2025-12",
+   "latest_month": "2025-12",
+   "series_path": "region/punjab_haryana/series.json",
+   "export_paths": [],
+   "audit_flags": [
+    {
+     "id": "C1_terra_aqua_ratio",
+     "label": "Terra/Aqua annual detection ratio trend, daytime (pre-2012 stability)",
+     "value": -4.035283553339541,
+     "unit": "% per year",
+     "ci_low": -6.401068681831636,
+     "ci_high": 1.3872057992989544,
+     "ci_level": 0.95,
+     "threshold": 2.0,
+     "threshold_rule": "flagged if |Theil-Sen slope| > 2%/yr, or a single change-point with |delta| > log(1.15) and year-block permutation p < 0.05 (PREREG \u00a77 C1)",
+     "flagged": true,
+     "n": 9,
+     "source_ref": {
+      "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+      "key": "C1_terra_aqua.punjab_haryana|D.pct_per_year"
+     },
+     "scope": "region",
+     "period": "2003-2011",
+     "note": "CI is the Theil-Sen 95% slope interval converted to %/yr. Common-mode Terra+Aqua drift cannot be seen in their ratio. A flag does not change the record."
+    },
+    {
+     "id": "C1_frp_floor",
+     "label": "Aqua daytime detection floor: change in 5th-percentile FRP over 2003-2011",
+     "value": -0.0,
+     "unit": "relative change over period",
+     "ci_low": null,
+     "ci_high": null,
+     "ci_level": null,
+     "threshold": 0.1,
+     "threshold_rule": "flagged if |Theil-Sen trend x span / median| > 0.10 for FRP p5 or brightness p5",
+     "flagged": false,
+     "n": 143118,
+     "source_ref": {
+      "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+      "key": "C1_detection_floor.punjab_haryana.frp_p5.relative_change_over_period"
+     },
+     "scope": "region",
+     "period": "2003-2011",
+     "note": "Brightness p5 relative change 0.0018. No CI computed."
+    },
+    {
+     "id": "D6_relabel_2018",
+     "label": "Step in native Aqua/S-NPP ratio at the 2018-01 FIRMS version relabel (daytime)",
+     "value": -0.1113244306902084,
+     "unit": "log ratio",
+     "ci_low": null,
+     "ci_high": null,
+     "ci_level": null,
+     "threshold": 0.09531017980432493,
+     "threshold_rule": "component flagged if |delta| > log(1.10) and exact permutation p < 0.05; 'notable' needs >= 2 core regions (Deviation D6)",
+     "flagged": false,
+     "n": 35,
+     "source_ref": {
+      "path": "analysis/results/20261110T013217Z_primary/d6_version_step.json",
+      "key": "a_2018_relabel.punjab_haryana|D|aqua_over_snpp.delta_log"
+     },
+     "scope": "region",
+     "period": "2012-2021 training years",
+     "note": "Exact year-label permutation p = 0.486 over 35 splits (n = splits). Descriptive; cannot change the primary decision."
+    },
+    {
+     "id": "D6_relabel_2023",
+     "label": "Change in native Aqua/NOAA-20 ratio, 2022 to 2023 (2023-01 relabel), daytime",
+     "value": 0.0460835182178867,
+     "unit": "log ratio",
+     "ci_low": null,
+     "ci_high": null,
+     "ci_level": null,
+     "threshold": null,
+     "threshold_rule": "not evaluated: not separable from Aqua orbit drift",
+     "flagged": null,
+     "n": 23,
+     "source_ref": {
+      "path": "analysis/results/20261110T013217Z_primary/d6_version_step.json",
+      "key": "b_2023_relabel.punjab_haryana|D|aqua_over_noaa20.delta_log"
+     },
+     "scope": "region",
+     "period": "2022-2023",
+     "note": "not separable from drift (Aqua orbit drift and Terra's 2022-10 orbit lowering coincide)."
+    }
+   ],
+   "tier": "core"
+  },
+  {
+   "id": "n_australia_topend",
+   "name": "Northern Australia Top End",
+   "role": "pilot",
+   "description": "core pilot region",
+   "bbox": [
+    129.0,
+    -17.0,
+    137.0,
+    -11.0
+   ],
+   "geometry_path": null,
+   "area_km2_land": 410385.2,
+   "status": "validated",
+   "status_reason": "passed pre-registered thresholds",
+   "method": "aqua_equiv_ratio",
+   "method_version": "kappa-ratio-1.0.0",
+   "trained_on_years": [
+    2012,
+    2014,
+    2015,
+    2017,
+    2018,
+    2020,
+    2021
+   ],
+   "held_out_years": [
+    2013,
+    2016,
+    2019
+   ],
+   "latest_standard_month": "2025-12",
+   "latest_month": "2025-12",
+   "series_path": "region/n_australia_topend/series.json",
+   "export_paths": [],
+   "audit_flags": [
+    {
+     "id": "C1_terra_aqua_ratio",
+     "label": "Terra/Aqua annual detection ratio trend, daytime (pre-2012 stability)",
+     "value": -0.7503995648596862,
+     "unit": "% per year",
+     "ci_low": -2.2591554714286324,
+     "ci_high": 1.177727855512672,
+     "ci_level": 0.95,
+     "threshold": 2.0,
+     "threshold_rule": "flagged if |Theil-Sen slope| > 2%/yr, or a single change-point with |delta| > log(1.15) and year-block permutation p < 0.05 (PREREG \u00a77 C1)",
+     "flagged": false,
+     "n": 9,
+     "source_ref": {
+      "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+      "key": "C1_terra_aqua.n_australia_topend|D.pct_per_year"
+     },
+     "scope": "region",
+     "period": "2003-2011",
+     "note": "CI is the Theil-Sen 95% slope interval converted to %/yr. Common-mode Terra+Aqua drift cannot be seen in their ratio. A flag does not change the record."
+    },
+    {
+     "id": "C1_frp_floor",
+     "label": "Aqua daytime detection floor: change in 5th-percentile FRP over 2003-2011",
+     "value": -0.12903225806451624,
+     "unit": "relative change over period",
+     "ci_low": null,
+     "ci_high": null,
+     "ci_level": null,
+     "threshold": 0.1,
+     "threshold_rule": "flagged if |Theil-Sen trend x span / median| > 0.10 for FRP p5 or brightness p5",
+     "flagged": true,
+     "n": 305361,
+     "source_ref": {
+      "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+      "key": "C1_detection_floor.n_australia_topend.frp_p5.relative_change_over_period"
+     },
+     "scope": "region",
+     "period": "2003-2011",
+     "note": "Brightness p5 relative change -0.0093. No CI computed."
+    },
+    {
+     "id": "D6_relabel_2018",
+     "label": "Step in native Aqua/S-NPP ratio at the 2018-01 FIRMS version relabel (daytime)",
+     "value": -0.05683348754478833,
+     "unit": "log ratio",
+     "ci_low": null,
+     "ci_high": null,
+     "ci_level": null,
+     "threshold": 0.09531017980432493,
+     "threshold_rule": "component flagged if |delta| > log(1.10) and exact permutation p < 0.05; 'notable' needs >= 2 core regions (Deviation D6)",
+     "flagged": false,
+     "n": 35,
+     "source_ref": {
+      "path": "analysis/results/20261110T013217Z_primary/d6_version_step.json",
+      "key": "a_2018_relabel.n_australia_topend|D|aqua_over_snpp.delta_log"
+     },
+     "scope": "region",
+     "period": "2012-2021 training years",
+     "note": "Exact year-label permutation p = 0.200 over 35 splits (n = splits). Descriptive; cannot change the primary decision."
+    },
+    {
+     "id": "D6_relabel_2023",
+     "label": "Change in native Aqua/NOAA-20 ratio, 2022 to 2023 (2023-01 relabel), daytime",
+     "value": -0.05850938848719611,
+     "unit": "log ratio",
+     "ci_low": null,
+     "ci_high": null,
+     "ci_level": null,
+     "threshold": null,
+     "threshold_rule": "not evaluated: not separable from Aqua orbit drift",
+     "flagged": null,
+     "n": 23,
+     "source_ref": {
+      "path": "analysis/results/20261110T013217Z_primary/d6_version_step.json",
+      "key": "b_2023_relabel.n_australia_topend|D|aqua_over_noaa20.delta_log"
+     },
+     "scope": "region",
+     "period": "2022-2023",
+     "note": "not separable from drift (Aqua orbit drift and Terra's 2022-10 orbit lowering coincide)."
+    }
+   ],
+   "tier": "core"
+  },
+  {
+   "id": "iberia_control",
+   "name": "Iberia (control)",
+   "role": "control",
+   "description": "core pilot region",
+   "bbox": [
+    -9.5,
+    37.0,
+    -1.0,
+    43.0
+   ],
+   "geometry_path": null,
+   "area_km2_land": 444854.0,
+   "status": "validated",
+   "status_reason": "passed pre-registered thresholds",
+   "method": "aqua_equiv_ratio",
+   "method_version": "kappa-ratio-1.0.0",
+   "trained_on_years": [
+    2012,
+    2014,
+    2015,
+    2017,
+    2018,
+    2020,
+    2021
+   ],
+   "held_out_years": [
+    2013,
+    2016,
+    2019
+   ],
+   "latest_standard_month": "2025-12",
+   "latest_month": "2025-12",
+   "series_path": "region/iberia_control/series.json",
+   "export_paths": [],
+   "audit_flags": [
+    {
+     "id": "C1_terra_aqua_ratio",
+     "label": "Terra/Aqua annual detection ratio trend, daytime (pre-2012 stability)",
+     "value": 0.6794441565450159,
+     "unit": "% per year",
+     "ci_low": -2.950202173025013,
+     "ci_high": 5.380288521860537,
+     "ci_level": 0.95,
+     "threshold": 2.0,
+     "threshold_rule": "flagged if |Theil-Sen slope| > 2%/yr, or a single change-point with |delta| > log(1.15) and year-block permutation p < 0.05 (PREREG \u00a77 C1)",
+     "flagged": false,
+     "n": 9,
+     "source_ref": {
+      "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+      "key": "C1_terra_aqua.iberia_control|D.pct_per_year"
+     },
+     "scope": "region",
+     "period": "2003-2011",
+     "note": "CI is the Theil-Sen 95% slope interval converted to %/yr. Common-mode Terra+Aqua drift cannot be seen in their ratio. A flag does not change the record."
+    },
+    {
+     "id": "C1_frp_floor",
+     "label": "Aqua daytime detection floor: change in 5th-percentile FRP over 2003-2011",
+     "value": -0.0551378446115287,
+     "unit": "relative change over period",
+     "ci_low": null,
+     "ci_high": null,
+     "ci_level": null,
+     "threshold": 0.1,
+     "threshold_rule": "flagged if |Theil-Sen trend x span / median| > 0.10 for FRP p5 or brightness p5",
+     "flagged": false,
+     "n": 27530,
+     "source_ref": {
+      "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+      "key": "C1_detection_floor.iberia_control.frp_p5.relative_change_over_period"
+     },
+     "scope": "region",
+     "period": "2003-2011",
+     "note": "Brightness p5 relative change -0.0005. No CI computed."
+    },
+    {
+     "id": "D6_relabel_2018",
+     "label": "Step in native Aqua/S-NPP ratio at the 2018-01 FIRMS version relabel (daytime)",
+     "value": -0.05683938635740224,
+     "unit": "log ratio",
+     "ci_low": null,
+     "ci_high": null,
+     "ci_level": null,
+     "threshold": 0.09531017980432493,
+     "threshold_rule": "component flagged if |delta| > log(1.10) and exact permutation p < 0.05; 'notable' needs >= 2 core regions (Deviation D6)",
+     "flagged": false,
+     "n": 35,
+     "source_ref": {
+      "path": "analysis/results/20261110T013217Z_primary/d6_version_step.json",
+      "key": "a_2018_relabel.iberia_control|D|aqua_over_snpp.delta_log"
+     },
+     "scope": "region",
+     "period": "2012-2021 training years",
+     "note": "Exact year-label permutation p = 0.429 over 35 splits (n = splits). Descriptive; cannot change the primary decision."
+    },
+    {
+     "id": "D6_relabel_2023",
+     "label": "Change in native Aqua/NOAA-20 ratio, 2022 to 2023 (2023-01 relabel), daytime",
+     "value": -0.09766985952335494,
+     "unit": "log ratio",
+     "ci_low": null,
+     "ci_high": null,
+     "ci_level": null,
+     "threshold": null,
+     "threshold_rule": "not evaluated: not separable from Aqua orbit drift",
+     "flagged": null,
+     "n": 23,
+     "source_ref": {
+      "path": "analysis/results/20261110T013217Z_primary/d6_version_step.json",
+      "key": "b_2023_relabel.iberia_control|D|aqua_over_noaa20.delta_log"
+     },
+     "scope": "region",
+     "period": "2022-2023",
+     "note": "not separable from drift (Aqua orbit drift and Terra's 2022-10 orbit lowering coincide)."
+    }
+   ],
+   "tier": "control"
+  },
+  {
+   "id": "car_sudanian",
+   "name": "Central African Republic Sudanian belt",
+   "role": "pilot",
+   "description": "spatial-transfer test region (stretch)",
+   "bbox": [
+    18.0,
+    4.0,
+    26.0,
+    10.0
+   ],
+   "geometry_path": null,
+   "area_km2_land": 586286.9,
+   "status": "provisional",
+   "status_reason": "intervals not valid (coverage below threshold)",
+   "method": "aqua_equiv_ratio",
+   "method_version": "kappa-ratio-1.0.0",
+   "trained_on_years": [
+    2012,
+    2014,
+    2015,
+    2017,
+    2018,
+    2020,
+    2021
+   ],
+   "held_out_years": [
+    2013,
+    2016,
+    2019
+   ],
+   "latest_standard_month": "2025-12",
+   "latest_month": "2025-12",
+   "series_path": "region/car_sudanian/series.json",
+   "export_paths": [],
+   "audit_flags": [
+    {
+     "id": "C1_terra_aqua_ratio",
+     "label": "Terra/Aqua annual detection ratio trend, daytime (pre-2012 stability)",
+     "value": -1.8434386146385915,
+     "unit": "% per year",
+     "ci_low": -2.70878386666162,
+     "ci_high": -0.8612001469348004,
+     "ci_level": 0.95,
+     "threshold": 2.0,
+     "threshold_rule": "flagged if |Theil-Sen slope| > 2%/yr, or a single change-point with |delta| > log(1.15) and year-block permutation p < 0.05 (PREREG \u00a77 C1)",
+     "flagged": false,
+     "n": 9,
+     "source_ref": {
+      "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+      "key": "C1_terra_aqua.car_sudanian|D.pct_per_year"
+     },
+     "scope": "region",
+     "period": "2003-2011",
+     "note": "CI is the Theil-Sen 95% slope interval converted to %/yr. Common-mode Terra+Aqua drift cannot be seen in their ratio. A flag does not change the record."
+    },
+    {
+     "id": "C1_frp_floor",
+     "label": "Aqua daytime detection floor: change in 5th-percentile FRP over 2003-2011",
+     "value": -0.030612244897959075,
+     "unit": "relative change over period",
+     "ci_low": null,
+     "ci_high": null,
+     "ci_level": null,
+     "threshold": 0.1,
+     "threshold_rule": "flagged if |Theil-Sen trend x span / median| > 0.10 for FRP p5 or brightness p5",
+     "flagged": false,
+     "n": 968614,
+     "source_ref": {
+      "path": "analysis/results/20261110T013217Z_primary/experiments.json",
+      "key": "C1_detection_floor.car_sudanian.frp_p5.relative_change_over_period"
+     },
+     "scope": "region",
+     "period": "2003-2011",
+     "note": "Brightness p5 relative change -0.0000. No CI computed."
+    },
+    {
+     "id": "D6_relabel_2018",
+     "label": "Step in native Aqua/S-NPP ratio at the 2018-01 FIRMS version relabel (daytime)",
+     "value": -0.06502114528877181,
+     "unit": "log ratio",
+     "ci_low": null,
+     "ci_high": null,
+     "ci_level": null,
+     "threshold": 0.09531017980432493,
+     "threshold_rule": "component flagged if |delta| > log(1.10) and exact permutation p < 0.05; 'notable' needs >= 2 core regions (Deviation D6)",
+     "flagged": false,
+     "n": 35,
+     "source_ref": {
+      "path": "analysis/results/20261110T013217Z_primary/d6_version_step.json",
+      "key": "a_2018_relabel.car_sudanian|D|aqua_over_snpp.delta_log"
+     },
+     "scope": "region",
+     "period": "2012-2021 training years",
+     "note": "Exact year-label permutation p = 0.371 over 35 splits (n = splits). Descriptive; cannot change the primary decision."
+    },
+    {
+     "id": "D6_relabel_2023",
+     "label": "Change in native Aqua/NOAA-20 ratio, 2022 to 2023 (2023-01 relabel), daytime",
+     "value": -0.041847325404083424,
+     "unit": "log ratio",
+     "ci_low": null,
+     "ci_high": null,
+     "ci_level": null,
+     "threshold": null,
+     "threshold_rule": "not evaluated: not separable from Aqua orbit drift",
+     "flagged": null,
+     "n": 23,
+     "source_ref": {
+      "path": "analysis/results/20261110T013217Z_primary/d6_version_step.json",
+      "key": "b_2023_relabel.car_sudanian|D|aqua_over_noaa20.delta_log"
+     },
+     "scope": "region",
+     "period": "2022-2023",
+     "note": "not separable from drift (Aqua orbit drift and Terra's 2022-10 orbit lowering coincide)."
+    }
+   ],
+   "tier": "stretch"
+  }
+ ],
+ "global_layers": [
+  {
+   "id": "belt",
+   "label": "Fire Belt Atlas (Aqua MODIS 2003\u20132011)",
+   "path": "global/belt.json",
+   "status": "available"
+  },
+  {
+   "id": "belt_monthly",
+   "label": "Typical month by calendar month (Aqua MODIS daytime, 2003\u20132011 average)",
+   "path": "global/belt_monthly.json",
+   "status": "available"
+  }
+ ],
+ "validation_path": "validation.json",
+ "sensors_path": "sensors.json",
+ "notes": [
+  "sources[].archive is classified from is_nrt evidence (no FIRMS version label ending in 'NRT'; clip nrt_fraction 0), not from the version string. The MODIS labels 6.2, 6.03 and 61.03 are undocumented by FIRMS (docs/DATA-AUDIT.md).",
+  "Detections are satellite hotspot detections, not fires, burned area or emissions.",
+  "Modelled values are estimates of what Aqua MODIS would have recorded; status provisional unless validated.",
+  "Contract 1.4.0: the 5 M2 confirmation regions (tier m2_primary) carry value_kind on every value; m2_validation.json holds the M2 held-out evidence. M1 regions are unchanged."
+ ],
+ "m2_regions": [
+  {
+   "id": "se_asia_mainland",
+   "name": "Mainland SE Asia (N Thailand/Laos/Myanmar)",
+   "role": "pilot",
+   "description": "M2 confirmation region (agricultural); never used to build or tune the method",
+   "bbox": [
+    97.0,
+    17.0,
+    103.0,
+    22.0
+   ],
+   "geometry_path": null,
+   "area_km2_land": 348086.9,
+   "status": "validated",
+   "status_reason": "validated \u2014 NOAA-20, 2018\u20132021 (M2)",
+   "method": null,
+   "method_version": null,
+   "held_out_years": [
+    2018,
+    2019,
+    2020,
+    2021
+   ],
+   "latest_standard_month": "2025-12",
+   "latest_month": "2025-12",
+   "series_path": "region/se_asia_mainland/series.json",
+   "export_paths": [],
+   "tier": "m2_primary",
+   "m2": {
+    "status_label": "validated \u2014 NOAA-20, 2018\u20132021 (M2)",
+    "outcome": "SUCCESS",
+    "predictor_platform": "noaa20",
+    "calibration_path": "direct",
+    "method_validation": "fresh_regions_M2",
+    "method_id": "n20_ratio_direct",
+    "method_version": "m2-estimators-1.0.0|kappa-ratio-1.0.0|predictor=noaa20|kappa=100",
+    "lane": "aqua_equiv_n20_ratio",
+    "validated_window": {
+     "start": "2018-04",
+     "end": "2021-12"
+    },
+    "fit_years": [
+     2018,
+     2019,
+     2020,
+     2021
+    ],
+    "design": "leave-one-year-out over 2018-2021: each year was held out from the fit that predicted it and used to fit the other three; fit_years is that set, so there is no separate training year list. The 2022+ converted_unvalidated values use one fit on all four years.",
+    "validation_path": "m2_validation.json",
+    "region_status_ref": "analysis/results_m2/confirm/q1_region_status.json"
+   }
+  },
+  {
+   "id": "zambia_miombo",
+   "name": "Zambia miombo woodland",
+   "role": "pilot",
+   "description": "M2 confirmation region (savanna wildland); never used to build or tune the method",
+   "bbox": [
+    22.0,
+    -16.0,
+    28.0,
+    -10.0
+   ],
+   "geometry_path": null,
+   "area_km2_land": 431868.8,
+   "status": "validated",
+   "status_reason": "validated \u2014 NOAA-20, 2018\u20132021 (M2)",
+   "method": null,
+   "method_version": null,
+   "held_out_years": [
+    2018,
+    2019,
+    2020,
+    2021
+   ],
+   "latest_standard_month": "2025-12",
+   "latest_month": "2025-12",
+   "series_path": "region/zambia_miombo/series.json",
+   "export_paths": [],
+   "tier": "m2_primary",
+   "m2": {
+    "status_label": "validated \u2014 NOAA-20, 2018\u20132021 (M2)",
+    "outcome": "SUCCESS",
+    "predictor_platform": "noaa20",
+    "calibration_path": "direct",
+    "method_validation": "fresh_regions_M2",
+    "method_id": "n20_ratio_direct",
+    "method_version": "m2-estimators-1.0.0|kappa-ratio-1.0.0|predictor=noaa20|kappa=100",
+    "lane": "aqua_equiv_n20_ratio",
+    "validated_window": {
+     "start": "2018-04",
+     "end": "2021-12"
+    },
+    "fit_years": [
+     2018,
+     2019,
+     2020,
+     2021
+    ],
+    "design": "leave-one-year-out over 2018-2021: each year was held out from the fit that predicted it and used to fit the other three; fit_years is that set, so there is no separate training year list. The 2022+ converted_unvalidated values use one fit on all four years.",
+    "validation_path": "m2_validation.json",
+    "region_status_ref": "analysis/results_m2/confirm/q1_region_status.json"
+   }
+  },
+  {
+   "id": "kazakh_steppe",
+   "name": "Kazakh steppe",
+   "role": "control",
+   "description": "M2 confirmation region (control); never used to build or tune the method",
+   "bbox": [
+    60.0,
+    48.0,
+    70.0,
+    53.0
+   ],
+   "geometry_path": null,
+   "area_km2_land": 394486.3,
+   "status": "validated",
+   "status_reason": "validated \u2014 NOAA-20, 2018\u20132021 (M2)",
+   "method": null,
+   "method_version": null,
+   "held_out_years": [
+    2018,
+    2019,
+    2020,
+    2021
+   ],
+   "latest_standard_month": "2025-12",
+   "latest_month": "2025-12",
+   "series_path": "region/kazakh_steppe/series.json",
+   "export_paths": [],
+   "tier": "m2_primary",
+   "m2": {
+    "status_label": "validated \u2014 NOAA-20, 2018\u20132021 (M2)",
+    "outcome": "SUCCESS",
+    "predictor_platform": "noaa20",
+    "calibration_path": "direct",
+    "method_validation": "fresh_regions_M2",
+    "method_id": "n20_ratio_direct",
+    "method_version": "m2-estimators-1.0.0|kappa-ratio-1.0.0|predictor=noaa20|kappa=100",
+    "lane": "aqua_equiv_n20_ratio",
+    "validated_window": {
+     "start": "2018-04",
+     "end": "2021-12"
+    },
+    "fit_years": [
+     2018,
+     2019,
+     2020,
+     2021
+    ],
+    "design": "leave-one-year-out over 2018-2021: each year was held out from the fit that predicted it and used to fit the other three; fit_years is that set, so there is no separate training year list. The 2022+ converted_unvalidated values use one fit on all four years.",
+    "validation_path": "m2_validation.json",
+    "region_status_ref": "analysis/results_m2/confirm/q1_region_status.json"
+   }
+  },
+  {
+   "id": "cerrado_tocantins",
+   "name": "Cerrado (Tocantins)",
+   "role": "pilot",
+   "description": "M2 confirmation region (savanna wildland); never used to build or tune the method",
+   "bbox": [
+    -50.0,
+    -13.0,
+    -45.0,
+    -6.0
+   ],
+   "geometry_path": null,
+   "area_km2_land": 424806.1,
+   "status": "validated",
+   "status_reason": "validated \u2014 NOAA-20, 2018\u20132021 (M2)",
+   "method": null,
+   "method_version": null,
+   "held_out_years": [
+    2018,
+    2019,
+    2020,
+    2021
+   ],
+   "latest_standard_month": "2025-12",
+   "latest_month": "2025-12",
+   "series_path": "region/cerrado_tocantins/series.json",
+   "export_paths": [],
+   "tier": "m2_primary",
+   "m2": {
+    "status_label": "validated \u2014 NOAA-20, 2018\u20132021 (M2)",
+    "outcome": "SUCCESS",
+    "predictor_platform": "noaa20",
+    "calibration_path": "direct",
+    "method_validation": "fresh_regions_M2",
+    "method_id": "n20_ratio_direct",
+    "method_version": "m2-estimators-1.0.0|kappa-ratio-1.0.0|predictor=noaa20|kappa=100",
+    "lane": "aqua_equiv_n20_ratio",
+    "validated_window": {
+     "start": "2018-04",
+     "end": "2021-12"
+    },
+    "fit_years": [
+     2018,
+     2019,
+     2020,
+     2021
+    ],
+    "design": "leave-one-year-out over 2018-2021: each year was held out from the fit that predicted it and used to fit the other three; fit_years is that set, so there is no separate training year list. The 2022+ converted_unvalidated values use one fit on all four years.",
+    "validation_path": "m2_validation.json",
+    "region_status_ref": "analysis/results_m2/confirm/q1_region_status.json"
+   }
+  },
+  {
+   "id": "argentina_chaco_parana",
+   "name": "Argentina Chaco / Parana",
+   "role": "pilot",
+   "description": "M2 confirmation region (savanna wildland); never used to build or tune the method",
+   "bbox": [
+    -62.0,
+    -28.0,
+    -56.0,
+    -22.0
+   ],
+   "geometry_path": null,
+   "area_km2_land": 402388.7,
+   "status": "validated",
+   "status_reason": "validated \u2014 NOAA-20, 2018\u20132021 (M2)",
+   "method": null,
+   "method_version": null,
+   "held_out_years": [
+    2018,
+    2019,
+    2020,
+    2021
+   ],
+   "latest_standard_month": "2025-12",
+   "latest_month": "2025-12",
+   "series_path": "region/argentina_chaco_parana/series.json",
+   "export_paths": [],
+   "tier": "m2_primary",
+   "m2": {
+    "status_label": "validated \u2014 NOAA-20, 2018\u20132021 (M2)",
+    "outcome": "SUCCESS",
+    "predictor_platform": "noaa20",
+    "calibration_path": "direct",
+    "method_validation": "fresh_regions_M2",
+    "method_id": "n20_ratio_direct",
+    "method_version": "m2-estimators-1.0.0|kappa-ratio-1.0.0|predictor=noaa20|kappa=100",
+    "lane": "aqua_equiv_n20_ratio",
+    "validated_window": {
+     "start": "2018-04",
+     "end": "2021-12"
+    },
+    "fit_years": [
+     2018,
+     2019,
+     2020,
+     2021
+    ],
+    "design": "leave-one-year-out over 2018-2021: each year was held out from the fit that predicted it and used to fit the other three; fit_years is that set, so there is no separate training year list. The 2022+ converted_unvalidated values use one fit on all four years.",
+    "validation_path": "m2_validation.json",
+    "region_status_ref": "analysis/results_m2/confirm/q1_region_status.json"
+   }
+  }
+ ],
+ "m2_validation_path": "m2_validation.json"
+}
